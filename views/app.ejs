@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- Head -->
+    <%- include("partials/head") %>
+    <!-- Body -->
+    <body class="preload">
+        <!-- Remove Preload -->
+        <script>
+            document.querySelector(".preload").classList.remove("preload");
+        </script>
+        <!-- Header -->
+        <header class="app-header">
+            <img src="images/logo.svg" alt="Website Logo" class="web-logo">
+            <nav>
+                <ul>
+                    <a href="/leaderboard"><li>leaderboard</li></a>
+                    <li onclick="openSection('settings');">settings</li>
+                    <li onclick="openSection('info');">info</li>
+                </ul>
+                <div class="back-btn app-back-btn" onclick="openSection('dashboard');">
+                    <p>Back</p>
+                    <i class="fas fa-long-arrow-alt-left"></i>
+                </div>
+            </nav>
+        </header>
+        <!-- Dashboard Section -->
+        <section class="dashboard section-opened">
+            <div class="left dashboard-info">
+                <div class="user-info">
+                    <% if (user.userGender == "female") { %>
+                        <img src="images/female.png" alt="Male Avatar" class="user-avatar">
+                    <% } else { %>
+                        <img src="images/male.png" alt="Female Avatar" class="user-avatar">
+                    <% } %>
+                    <p class="user-name">@<%= user.userName %></p>
+                </div>
+                <div class="user-statistics">
+                    <div class="stat-element stat-rank" title="<%= user.userRank %>">
+                        <div class="stat-type">
+                            <i class="fas fa-crown"></i>
+                            <p>Rank</p>
+                        </div>
+                        <div class="stat-content number-formatter" data-number="<%= user.userRank %>" data-format="number-int"></div>
+                    </div>
+                    <div class="stat-element stat-items" title="<%= user.userItems.length %>">
+                        <div class="stat-type">
+                            <i class="fas fa-recycle"></i>
+                            <p>Items</p>
+                        </div>
+                        <div class="stat-content number-formatter" data-number="<%= user.userItems.length %>" data-format="number-int"></div>
+                    </div>
+                    <div class="stat-element stat-coins" title="<%= user.userCoins %>">
+                        <div class="stat-type">
+                            <i class="fas fa-donate"></i>
+                            <p>Coins</p>
+                        </div>
+                        <div class="stat-content number-formatter" data-number="<%= user.userCoins %>" data-format="number"></div>
+                    </div>
+                </div>
+                <div class="user-balance" title="<%= userBalance %>">
+                    <p class="balance-title">Balance</p>
+                    <h1 class="balance-content"><span class="number-formatter" data-number="<%= userBalance %>" data-format="number">800</span> AED</h1>
+                </div>
+            </div>
+            <div class="right dashboard-btns">
+                <button class="add-item-btn" onclick="openDiv('items')">
+                    <i class="fas fa-plus-circle"></i>
+                    <p>Add item</p>
+                </button>
+                <button class="my-items-btn" onclick="openSection('my-items')">
+                    <i class="fas fa-box-open"></i>
+                    <p>My items</p>
+                </button>
+            </div>
+        </section>
+        <!-- Leaderboard Section -->
+
+
+        <!-- LEADERBOARD TEMPLATE PLACED IN info.js -->
+
+
+        <!-- Settings Section -->
+        <section class="settings">
+            <h1 class="section-title">Settings</h1>
+            <div class="settings-content">
+                <div class="left">
+                    <button class="settings-option current-option" onclick="openSettings(this, 'appearance')">
+                        <i class="fas fa-palette"></i>
+                        <p>Appearance</p>
+                    </button>
+                    <button class="settings-option" onclick="openSettings(this, 'account')">
+                        <i class="fas fa-user"></i>
+                        <p>Account</p>
+                    </button>
+                    <button class="settings-option dangerous-text" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <p>Logout</p>
+                    </button>
+                </div>
+                <div class="right">
+                    <div class="appearance-settings settings-opened">
+                        <h1>Dark Theme</h1>
+                        <div class="dark-theme-switch">
+                            <div class="dark-theme-switch-thumb"></div>
+                        </div>
+                        <p>Off</p>
+                    </div>
+                    <div class="account-settings">
+                        <div class="user-account">
+                            <h1>User account</h1>
+                            <div>
+                                <div class="username-div">
+                                    <p>username</p>
+                                    <button onclick="openDiv('username')"><%= user.userName %></button>
+                                </div>
+                                <div class="password-div">
+                                    <p>password</p>
+                                    <button onclick="openDiv('password')">*************</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="danger-zone">
+                            <h1 class="dangerous-text">Danger zone</h1>
+                            <div>
+                                <button class="delete-account-btn dangerous-button" onclick="openDiv('delete')">Delete Account</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- My Items Section -->
+        <section class="my-items">
+            <div class="table-container">
+                <div class="table">
+                    <% let items = user.userItems.reverse(); %>
+                    <% let itemsLength = items.length >= 100 ? 100 : items.length; %>
+                    <% for (let i = 0; i < itemsLength; i++) { %>
+                    <div class="table-element">
+                        <div class="item-number">
+                            <%= (i + 1) %>
+                        </div>
+                        <div class="item-weight number-formatter" data-number="<%= items[i].itemWeight %>" data-format="weight">
+                            <!-- INSERTED -->
+                        </div>
+                        <div class="item-date number-formatter" data-number="<%= items[i].dateInserted %>" data-format="date">
+                            <!-- INSERTED -->
+                        </div>
+                    </div>
+                    <% } %>
+                    <% if (items.length > 100) { %>
+                        <p class="items-left">
+                            <% let itemsLeft = items.length - 100; %>
+                            <% if (itemsLeft > 1) { %>
+                                <%= itemsLeft %> Items left
+                            <% } else { %>
+                                <%= itemsLeft %> Item left
+                            <% } %>
+                        </p>
+                    <% } %>
+                </div>
+            </div>
+            <div class="table-border">
+                <% if (itemsLength < 1) { %>
+                    <p class="no-items-msg">No items to display</p>
+                <% } %>
+            </div>
+        </section>
+        <!-- Edit Username/Password Popups -->
+        <div class="edit-username popup">
+            <h1>Edit Username</h1>
+            <input type="text" placeholder="New Username">
+            <input type="password" placeholder="Enter Password">
+            <button onclick="editAccount(this, 'username')">Change Username <i class="fas fa-edit"></i></button>
+            <p class="edit-error-field"></p>
+        </div>
+        <div class="edit-password popup">
+            <h1>Edit Password</h1>
+            <input type="password" placeholder="Original Password">
+            <input type="password" placeholder="New Password">
+            <input type="password" placeholder="Confirm Password">
+            <button onclick="editAccount(this, 'password')">Change Password <i class="fas fa-edit"></i></button>
+            <p class="edit-error-field"></p>
+        </div>
+        <div class="edit-delete popup">
+            <h1 class="dangerous-text">Delete Account</h1>
+            <input type="text" placeholder="Enter Username">
+            <input type="password" placeholder="Enter Password">
+            <button onclick="editAccount(this, 'delete')" class="dangerous-button">Delete Account</button>
+            <p class="edit-error-field"></p>
+        </div>
+        <!-- Add Item Popup -->
+        <div class="edit-items popup">
+            <input type="number" placeholder="Item Weight (grams)" class="item-weight-input">
+            <button onclick="addItem(this.previousElementSibling)">Add Item <i class="fas fa-plus"></i></button>
+            <p class="edit-error-field"></p>
+        </div>
+        <!-- Darken Mode -->
+        <div class="darken"></div>
+        <!-- Website Theme CSS -->
+        <style class="theme-element"></style>
+        <!-- Scripts -->
+        <script src="js/appScript.js" defer></script>
+    </body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- Head -->
+    <%- include("partials/head") %>
+    <!-- Body -->
+    <body>
+        <!-- Header -->
+        <header class="app-header">
+            <img src="images/logo.svg" alt="Website Logo" class="web-logo">
+            <nav>
+                <a href="/">
+                    <div class="back-btn ldrbrd-back-btn">
+                        <p>Back</p>
+                        <i class="fas fa-long-arrow-alt-left"></i>
+                    </div>
+                </a>
+            </nav>
+        </header>
+        <!-- Leaderboard -->
+        <section class="leaderboard" style="display:block;opacity:1;">
+            <h1 class="section-title">Leaderboard</h1>
+            <div class="table-container">
+                <div class="table">
+                    <% for (let i = 0; i < leaderboardUsers.length; i++) { %>
+                        <% if (leaderboardUsers[i] == "undefined") { %>
+                            <div class="table-element">
+                                <div class="element-number">
+                                    <% if (i == 0) { %>
+                                        <i class="fas fa-crown"></i>
+                                    <% } else { %>
+                                        <p><%= i + 1 %></p>
+                                    <% } %>
+                                </div>
+                                <div class="element-username">
+                                    <p class="dangerous-text">Deleted User</p>
+                                </div>
+                            </div>
+                        <% } else { %>
+                            <% let leaderboardCurrentUser = ""; %>
+                            <% if (user) { %>
+                                <% if (leaderboardUsers[i].userName == user.userName) { leaderboardCurrentUser = "special-element"; } %>
+                            <% } %>
+                            <div class="table-element <%= leaderboardCurrentUser %>">
+                                <div class="element-number">
+                                    <% if (leaderboardUsers[i].userRank == 1) { %>
+                                        <i class="fas fa-crown"></i>
+                                    <% } else { %>
+                                        <p><%= leaderboardUsers[i].userRank %></p>
+                                    <% } %>
+                                </div>
+                                <div class="element-username">
+                                    <% if (leaderboardUsers[i].userGender == "female") { %>
+                                        <img src="images/female.png" alt="User Avatar">
+                                    <% } else { %>
+                                        <img src="images/male.png" alt="User Avatar">
+                                    <% } %>
+                                    @<%= leaderboardUsers[i].userName %>
+                                </div>
+                                <div class="element-coins">
+                                    <i class="fas fa-donate"></i>
+                                    <p class="number-formatter" data-number="<%= leaderboardUsers[i].userCoins %>" data-format="number"></p>
+                                </div>
+                                <div class="element-items">
+                                    <i class="fas fa-recycle"></i>
+                                    <p class="number-formatter" data-number="<%= leaderboardUsers[i].userItems.length %>" data-format="number-int"></p>
+                                </div>
+                            </div>
+                        <% } %>
+                    <% } %>
+                </div>
+                <div class="table-border"></div>
+            </div>
+        </section>
+        <!-- Website Theme CSS -->
+        <style class="theme-element"></style>
+    </body>
+</html>
