@@ -10,7 +10,7 @@ const projct_info = {
         "Mohamad Khalil Musharbek (Argent) - Physical Model Developer"
     ],
     project_technologies: ["HTML", "CSS", "JavaScript", "Node.js", "Express.js", "EJS", "JWT", "Heroku Hosting", "Font Awesome", "Google Fonts"],
-    development_duration: "53:20:00 (yet)",
+    development_duration: "54:20:00 (yet)",
     development_start: "22 Oct, 2021",
     development_end: null
 };
@@ -261,18 +261,13 @@ const project_updates = {
         "Created checkUser() function that checks if the user we are trying to apply changes to exists or not, if not, the edit/addItem function wont complete to avoid fatal errors",
         "Added two new admin_command() commands, get-user command which gets all user information, get-changers command which gets the changers values",
         "Added table consoling, when the admin_command() returns an object, its displayed in the console as a table"
+    ],
+    "3 Dec, 2021": [
+        "Removed all the repeated validations in the edit-account code, and used the signupValidation() function to validate most of the editing",
+        "Added character validation in signupValidation() when validating a username, now, only letters, numbers, and underscores will be allowed in usernames",
+        "Prevented signup validation error from logging in the server console"
     ]
 };
-
-
-
-// ***** BUGS TO FIX *****
-/*
-    - When user enters incorrect password confirmation, the password confirmation error is misleading and needs to be changed
-    - When running admin_command on a user with a name that starts with @ , the @ will be exluded, which will cause errors, solution : {
-        - Prevent signing up with illegal characters such as @ as a first character
-    }
-*/
 
 
 
@@ -281,7 +276,6 @@ const project_updates = {
 /*
 
 {
-    0- Prevent sign ups with illegal charaters in the username
     1- Confirmation messages when deleting account, or logging out
     2- Load more users in the leaderboard
     3- Load more items in my-items list

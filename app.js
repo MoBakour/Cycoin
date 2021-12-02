@@ -173,7 +173,8 @@ app.post("/signup", async (req, res) => {
     } catch(err) {
         if (err.code == 11000) {
             errorsObject.userNameError = "Someone took this username before you";
-        } else {
+        }
+        if (err.code !== 11000 && err.message !== "User validation failed") {
             console.log(err);
         }
         res.status(400).json({ success: false, errorsObject });
@@ -194,9 +195,8 @@ app.post("/edit", async (req, res) => {
     comparePassword = await bcrypt.compare(password, originalPassword);
     switch (edit) {
         case "username":
-            if (username.length > 20) editError = "Too long, should be no more than 20 characters";
-            if (username.includes(" ")) editError = "No no no, no spaces allowed >:(";
-            if (username == "") editError = "Can't let you pass without a username";
+            let { userNameError } = await signupValidation({ userName: username });
+            editError = userNameError;
             if (username == currentUser_info.userName) editError = "Same username doe?";
             if (!comparePassword) editError = "Not your password? u a thief?";
             if (editError != "") return res.status(400).json({ success: false, editError });
@@ -212,11 +212,9 @@ app.post("/edit", async (req, res) => {
         case "password":
             compareNew = await bcrypt.compare(newPassword, originalPassword);
             if (compareNew) editError = "Same password doe?";
-            if (newPassword != confirmPassword) editError = "Can't you do this right?";
-            if (newPassword.length > 100) editError = "Too long, can't let you with more than 100 characters";
-            if (newPassword.length < 6) editError = "Too short, do atleast 6 characters";
-            if (newPassword.includes(" ")) editError = "Sorry but u can't have spaces in that";
-            if (newPassword == "") editError = "Don't you need a password?";
+            let { userPasswordError, userPasswordConfirmationError } = await signupValidation({ userPassword: newPassword, userPasswordConfirmation: confirmPassword });
+            if (userPasswordConfirmationError !== "") editError = userPasswordConfirmationError;
+            if (userPasswordError !== "") editError = userPasswordError;
             if (!comparePassword) editError = "Not your password, u a thief?";
             if (editError != "") return res.status(400).json({ success: false, editError });
             let salt = await bcrypt.genSalt();
