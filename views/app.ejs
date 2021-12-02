@@ -33,6 +33,9 @@
                         <img src="images/male.png" alt="Female Avatar" class="user-avatar">
                     <% } %>
                     <p class="user-name">@<%= user.userName %></p>
+                    <% if (user.userVerified) { %>
+                        <i class="fas fa-medal verification-sign" title="Verified User"></i>
+                    <% } %>
                 </div>
                 <div class="user-statistics">
                     <div class="stat-element stat-rank" title="<%= user.userRank %>">
@@ -73,12 +76,6 @@
                 </button>
             </div>
         </section>
-        <!-- Leaderboard Section -->
-
-
-        <!-- LEADERBOARD TEMPLATE PLACED IN info.js -->
-
-
         <!-- Settings Section -->
         <section class="settings">
             <h1 class="section-title">Settings</h1>
@@ -131,6 +128,7 @@
         </section>
         <!-- My Items Section -->
         <section class="my-items">
+            <h1 class="section-title">My Items</h1>
             <div class="table-container">
                 <div class="table">
                     <% let items = user.userItems.reverse(); %>
@@ -152,9 +150,9 @@
                         <p class="items-left">
                             <% let itemsLeft = items.length - 100; %>
                             <% if (itemsLeft > 1) { %>
-                                <%= itemsLeft %> Items left
+                                <%= itemsLeft %> more items
                             <% } else { %>
-                                <%= itemsLeft %> Item left
+                                <%= itemsLeft %> more item
                             <% } %>
                         </p>
                     <% } %>

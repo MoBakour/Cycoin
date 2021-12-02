@@ -10,7 +10,7 @@ const projct_info = {
         "Mohamad Khalil Musharbek (Argent) - Physical Model Developer"
     ],
     project_technologies: ["HTML", "CSS", "JavaScript", "Node.js", "Express.js", "EJS", "JWT", "Heroku Hosting", "Font Awesome", "Google Fonts"],
-    development_duration: "47:10:00 (yet)",
+    development_duration: "51:10:00 (yet)",
     development_start: "22 Oct, 2021",
     development_end: null
 };
@@ -243,10 +243,29 @@ const project_updates = {
         "Changed the way of the leaderboard page layout & placed the logo and back-btn of the leaderboard page inside a header styled by the app-header",
         "Placed the number formatting caller from the appScript to the numberFormatter.js",
         "Deleted the script.js file as its useless so far",
-        "Now, the leaderboard can be accessed from inside and outside the application"
+        "Now, the leaderboard can be accessed from inside and outside the application",
+        // Later that day
+        "Worked on the layout of the website to make it ready for responsivness"
+    ],
+    "2 Dec, 2021": [
+        "Made some more changes on the settings section layout, as well the leaderboard styling",
+        "Fixed the table layout that was affected by the recent website layout changes",
+        "Added a title for my-items section, and did some changes on the layout of the table to make it compatable with the new title",
+        "Created user verification system, includes adding a new field in the user schema in user.js, which is userVerified",
+        "Added verification sign/indicator beside the user name in multiple positions in the website",
+        "Recreated the script.js file and placed it in the js directory in public",
+        "Created console warnings for directed for admins and users",
+        "Created admin_command() function which is used to allow admins to do actions on users and on the application through the devtools console, protected by a password"
+        // Hit 50 hours working on the application so far
     ]
 };
 
+
+
+// ***** BUGS TO FIX *****
+/*
+    - When user is deleted by an admin, then he tries to do an action such as add an item, we get a fatal error that destroys the server
+*/
 
 
 
@@ -255,13 +274,12 @@ const project_updates = {
 /*
 
 {
-    2- Confirmation messages when deleting account, or logging out
-    3- Load more users in the leaderboard
-    4- Load more items in my-items list
-    5- Add userCountry
-    6- Create the info section
-    7- Create admin control panel
-    8- Make the application responsive
+    1- Confirmation messages when deleting account, or logging out
+    2- Load more users in the leaderboard
+    3- Load more items in my-items list
+    4- Add userCountry
+    5- Create the info section
+    6- Make the application responsive
 }
 
 */

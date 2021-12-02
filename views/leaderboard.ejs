@@ -17,9 +17,10 @@
             </nav>
         </header>
         <!-- Leaderboard -->
-        <section class="leaderboard" style="display:block;opacity:1;">
+        <section class="leaderboard">
             <h1 class="section-title">Leaderboard</h1>
             <div class="table-container">
+                <div class="table-border"></div>
                 <div class="table">
                     <% for (let i = 0; i < leaderboardUsers.length; i++) { %>
                         <% if (leaderboardUsers[i] == "undefined") { %>
@@ -55,6 +56,9 @@
                                         <img src="images/male.png" alt="User Avatar">
                                     <% } %>
                                     @<%= leaderboardUsers[i].userName %>
+                                    <% if (leaderboardUsers[i].userVerified) { %>
+                                        <i class="fas fa-medal verification-sign" title="Verified User"></i>
+                                    <% } %>
                                 </div>
                                 <div class="element-coins">
                                     <i class="fas fa-donate"></i>
@@ -68,7 +72,6 @@
                         <% } %>
                     <% } %>
                 </div>
-                <div class="table-border"></div>
             </div>
         </section>
         <!-- Website Theme CSS -->

@@ -26,6 +26,10 @@ const userSchema = new Schema({
         default: "male",
         required: true
     },
+    userVerified: {
+        type: Boolean,
+        default: false
+    },
     userRank: Number,
     userItems: [new Schema({
         itemWeight: Number,

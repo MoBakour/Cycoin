@@ -41,6 +41,7 @@ dotenv.config();
 let DB_URI = process.env.DB_URI;
 let PORT = process.env.PORT || 3000;
 let SECRET = process.env.SECRET;
+let COMMAND_PASS = process.env.COMMAND_PASS;
 
 // App Variables
 let currentUser, currentUser_id, currentUser_info, loggedIn;
@@ -146,6 +147,7 @@ app.post("/signup", async (req, res) => {
             userName: req.body.userName,
             userPassword: req.body.userPassword,
             userGender: req.body.userGender,
+            userVerified: false,
             userRank: await User.count() + 1,
             userItems: [],
             userCoins: 0
@@ -223,4 +225,51 @@ app.post("/additem", async (req, res) => {
         const { userCoins, userBalance } = await generators.generateCycoin(userItems, currentUser_id);
         res.json({ success: true, dateInserted: userItems[userItems.length - 1].dateInserted, userCoins, userBalance });
     }
+});
+
+app.post("/admin-command", async (req, res) => {
+    let { command, username, password } = req.body;
+    let checkUser = await User.findOne({ userName: username });
+    let success = false;
+    if (username) {
+        if (username.startsWith("@")) username = username.slice(1);
+    }
+    if (command.endsWith("user") && !checkUser) return res.json({ success });
+    if (password == COMMAND_PASS) {
+        switch (command) {
+            case "delete-user":
+                await User.findOneAndDelete({ userName: username });
+                success = true;
+            break;
+            case "verify-user":
+                await User.findOneAndUpdate({ userName: username }, { userVerified: true });
+                success = true;
+            break;
+            case "unverify-user":
+                await User.findOneAndUpdate({ userName: username }, { userVerified: false });
+                success = true;
+            break;
+            case "clear-user":
+                await User.findOneAndUpdate({ userName: username }, { userItems: [], userCoins: 0 });
+                success = true;
+            break;
+            case "generate-changers":
+                await generators.generateChangers();
+                success = true;
+            break;
+            case "generate-ranking":
+                await generators.generateRanking();
+                success = true;
+            break;
+            case "generate":
+                await generators.generateChangers();
+                await generators.generateRanking();
+                success = true;
+            break;
+            case "test":
+                success = true;
+            break;
+        }
+    }
+    res.json({ success });
 });

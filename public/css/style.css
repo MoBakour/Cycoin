@@ -19,7 +19,7 @@ body {
     transition: var(--bg-transition);
 }
 section:not(.home-sections) {
-    height: calc(100vh - 100px);
+    min-height: calc(100vh - 100px);
     width: 90%;
     color: var(--color-one);
     position: absolute;
@@ -59,6 +59,11 @@ a, a:active {
 }
 .fas.fa-recycle {
     color: var(--color-one);
+}
+.verification-sign {
+    color: cyan !important;
+    font-size: 30px !important;
+    margin-left: 10px !important;
 }
 
 /* Home Page */
@@ -303,6 +308,7 @@ a, a:active {
 /* User Dashboard / App.ejs */
 .dashboard {
     display: flex;
+    align-items: center;
 }
 .dashboard .left {
     transform: translateX(-30%);
@@ -429,7 +435,7 @@ a, a:active {
 /* Settings */
 .settings-content {
     width: 100%;
-    height: calc(100% - 200px);
+    height: 400px;
     margin-top: 20px;
     display: flex;
     align-items: center;
@@ -438,8 +444,9 @@ a, a:active {
 .settings .left {
     width: 260px;
     height: 100%;
-    min-height: 200px;
-    max-height: 400px;
+    min-height: calc(200px - 20px);
+    max-height: calc(400px - 20px);
+    margin-bottom: 20px;
     background-color: var(--green-two);
     border-radius: 10px;
     transition: var(--bg-transition);
@@ -661,7 +668,7 @@ a, a:active {
 .table-container {
     width: calc(100% - 20px);
     max-width: calc(900px - 20px);
-    height: calc(100% - 140px);
+    height: 380px;
     padding: 10px;
     margin: auto;
     margin-top: 20px;
@@ -678,6 +685,18 @@ a, a:active {
 }
 .table {
     margin-right: 20px;
+}
+.table-border {
+    width: calc(100% - 20px);
+    max-width: calc(900px - 20px);
+    height: 400px;
+    border: 3px solid var(--color-one);
+    position: absolute;
+    top: 83px;
+    left: calc(50% - 10px);
+    transform: translateX(-50%);
+    border-radius: 20px;
+    z-index: -1;
 }
 .table-element {
     width: calc(100% - 20px);
@@ -702,18 +721,6 @@ a, a:active {
     width: 40px;
     margin-right: 10px;
 }
-.table-border {
-    width: calc(100% - 20px);
-    max-width: calc(900px - 20px);
-    height: calc(100% - 120px);
-    border: 3px solid var(--color-one);
-    position: absolute;
-    top: 20px;
-    left: calc(50% - 10px);
-    transform: translateX(-50%);
-    border-radius: 20px;
-    z-index: -1;
-}
 .table .special-element {
     background-color: var(--special-element) !important;
     color: var(--black) !important;
@@ -721,11 +728,14 @@ a, a:active {
 .table .special-element .fas.fa-recycle {color: var(--black) !important;}
 
 /* Leaderboard Table */
-.leaderboard .section-title {
-    text-align: center;
+.leaderboard {
+    display: block !important;
+    opacity: 1 !important;
+    z-index: 1 !important;
 }
-.leaderboard .table-border {
-    top: 83px;
+.leaderboard .section-title,
+.my-items .section-title {
+    text-align: center;
 }
 .element-number {
     width: calc(10% - 20px);
