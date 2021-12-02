@@ -3,7 +3,12 @@
     <!-- Head -->
     <%- include("partials/head") %>
     <!-- Body -->
-    <body>
+    <body class="preload">
+        <!-- Remove Preload & Set Browser Tab Title -->
+        <script>
+            document.querySelector(".preload").classList.remove("preload");
+            document.querySelector("title").innerText = "Cycoin | Leaderboard";
+        </script>
         <!-- Header -->
         <header class="app-header">
             <img src="images/logo.svg" alt="Website Logo" class="web-logo">

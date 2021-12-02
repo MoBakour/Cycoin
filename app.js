@@ -20,6 +20,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
+const fs = require("fs");
 
 // Require Exernal Middlewares
 const User = require("./models/user.js");
@@ -74,13 +75,27 @@ app.use(async (req, res, next) => {
     next();
 });
 
-// Authentication Based Redirect
+// Authentication
 function checkAuth(req, res, next) {
     if (loggedIn) {
         next();
     } else {
         res.render("home",  { user: currentUser_info });
     }
+}
+
+// Check If User Exists
+async function checkUser(cred_type, cred) {
+    let check;
+    switch (cred_type) {
+        case "id":
+            check = await User.exists({ _id: cred });
+        break;
+        case "username":
+            check = await User.exists({ userName: cred });
+        break;
+    }
+    return check;
 }
 
 // Create JWT Token
@@ -171,6 +186,8 @@ app.post("/logout", (req, res) => {
 
 app.post("/edit", async (req, res) => {
     let { edit, username, password, newPassword, confirmPassword } = req.body;
+    let userExists = await checkUser("id", currentUser_id);
+    if (!userExists) return res.status(400).json({ success: false, editError: "Process failed, refresh the page" });
     let originalPassword = currentUser_info.userPassword;
     let editError = "";
     let comparePassword, compareNew;
@@ -218,6 +235,8 @@ app.post("/edit", async (req, res) => {
 
 app.post("/additem", async (req, res) => {
     let itemWeight = req.body.weight;
+    let userExists = await checkUser("id", currentUser_id);
+    if (!userExists) return res.status(400).json({ success: false, editError: "Failed to add item, refresh the page" });
     if (itemWeight <= 0) {
         res.json({ success: false, editError: "Weighs less than a gram? cmon" });
     } else {
@@ -229,12 +248,13 @@ app.post("/additem", async (req, res) => {
 
 app.post("/admin-command", async (req, res) => {
     let { command, username, password } = req.body;
-    let checkUser = await User.findOne({ userName: username });
-    let success = false;
     if (username) {
         if (username.startsWith("@")) username = username.slice(1);
     }
-    if (command.endsWith("user") && !checkUser) return res.json({ success });
+    let userExists = await checkUser("username", username);
+    let success = false;
+    let returns = null;
+    if (command.endsWith("user") && !userExists) return res.json({ success });
     if (password == COMMAND_PASS) {
         switch (command) {
             case "delete-user":
@@ -252,6 +272,31 @@ app.post("/admin-command", async (req, res) => {
             case "clear-user":
                 await User.findOneAndUpdate({ userName: username }, { userItems: [], userCoins: 0 });
                 success = true;
+            break;
+            case "get-user":
+                const gotUser = await User.findOne({ userName: username });
+                const { userBalance } = await generators.generateCycoin(gotUser.userItems, gotUser._id);
+                returns = {
+                    Username: gotUser.userName,
+                    Gender: gotUser.userGender,
+                    Rank: gotUser.userRank,
+                    Items: gotUser.userItems.length,
+                    Coins: gotUser.userCoins,
+                    Balance: userBalance,
+                    Created: gotUser.createdAt
+                };
+                success = true;
+            break;
+            case "get-changers":
+                const data = fs.readFileSync("internalDatabase/changers.txt", { encoding: "utf-8" });
+                if (data) {
+                    let arrangedData = data.split(" splitter ");
+                    returns = {
+                        Rand: arrangedData[0],
+                        User_Rate: arrangedData[1]
+                    };
+                    success = true;
+                }
             break;
             case "generate-changers":
                 await generators.generateChangers();
@@ -271,5 +316,5 @@ app.post("/admin-command", async (req, res) => {
             break;
         }
     }
-    res.json({ success });
+    res.json({ success, returns });
 });

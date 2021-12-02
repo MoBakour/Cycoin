@@ -10,7 +10,7 @@ const projct_info = {
         "Mohamad Khalil Musharbek (Argent) - Physical Model Developer"
     ],
     project_technologies: ["HTML", "CSS", "JavaScript", "Node.js", "Express.js", "EJS", "JWT", "Heroku Hosting", "Font Awesome", "Google Fonts"],
-    development_duration: "51:10:00 (yet)",
+    development_duration: "53:20:00 (yet)",
     development_start: "22 Oct, 2021",
     development_end: null
 };
@@ -255,8 +255,12 @@ const project_updates = {
         "Added verification sign/indicator beside the user name in multiple positions in the website",
         "Recreated the script.js file and placed it in the js directory in public",
         "Created console warnings for directed for admins and users",
-        "Created admin_command() function which is used to allow admins to do actions on users and on the application through the devtools console, protected by a password"
+        "Created admin_command() function which is used to allow admins to do actions on users and on the application through the devtools console, protected by a password",
         // Hit 50 hours working on the application so far
+        // Later that day
+        "Created checkUser() function that checks if the user we are trying to apply changes to exists or not, if not, the edit/addItem function wont complete to avoid fatal errors",
+        "Added two new admin_command() commands, get-user command which gets all user information, get-changers command which gets the changers values",
+        "Added table consoling, when the admin_command() returns an object, its displayed in the console as a table"
     ]
 };
 
@@ -264,7 +268,10 @@ const project_updates = {
 
 // ***** BUGS TO FIX *****
 /*
-    - When user is deleted by an admin, then he tries to do an action such as add an item, we get a fatal error that destroys the server
+    - When user enters incorrect password confirmation, the password confirmation error is misleading and needs to be changes
+    - When running admin_command on a user with a name that starts with @ , the @ will be exluded, which will cause errors, solution : {
+        - Prevent signing up with illegal characters such as @ as a first character
+    }
 */
 
 
@@ -274,6 +281,7 @@ const project_updates = {
 /*
 
 {
+    0- Prevent sign ups with illegal charaters in the username
     1- Confirmation messages when deleting account, or logging out
     2- Load more users in the leaderboard
     3- Load more items in my-items list

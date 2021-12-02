@@ -23,6 +23,7 @@ function admin_command(command, username, password) {
         } else {
             console.log("%cFailure", "color:crimson;");
         }
+        if (data.returns) console.table(data.returns);
     })
     .catch(err => console.log(err));
 }
