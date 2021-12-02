@@ -268,7 +268,7 @@ const project_updates = {
 
 // ***** BUGS TO FIX *****
 /*
-    - When user enters incorrect password confirmation, the password confirmation error is misleading and needs to be changes
+    - When user enters incorrect password confirmation, the password confirmation error is misleading and needs to be changed
     - When running admin_command on a user with a name that starts with @ , the @ will be exluded, which will cause errors, solution : {
         - Prevent signing up with illegal characters such as @ as a first character
     }
