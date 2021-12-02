@@ -80,7 +80,7 @@ async function generateCycoin(items, userId) {
     return { userCoins, userBalance };
 }
 
-// Export Function
+// Export Functions
 module.exports = {
     generateRanking,
     generateLeaderboard,
