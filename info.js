@@ -10,7 +10,7 @@ const projct_info = {
         "Mohamad Khalil Musharbek (Argent) - Physical Model Developer"
     ],
     project_technologies: ["HTML", "CSS", "JavaScript", "Node.js", "Express.js", "EJS", "JWT", "Heroku Hosting", "Font Awesome", "Google Fonts"],
-    development_duration: "54:20:00 (yet)",
+    development_duration: "55:30:00 (yet)",
     development_start: "22 Oct, 2021",
     development_end: null
 };
@@ -265,14 +265,20 @@ const project_updates = {
     "3 Dec, 2021": [
         "Removed all the repeated validations in the edit-account code, and used the signupValidation() function to validate most of the editing",
         "Added character validation in signupValidation() when validating a username, now, only letters, numbers, and underscores will be allowed in usernames",
-        "Prevented signup validation error from logging in the server console"
+        "Prevented signup validation error from logging in the server console",
+        // Later that day
+        "Placed the adding-item code inside a try catch block to prevent fatal errors",
+        "Added 'No users to display' message in the leaderboard table in case there are no users displayed in the leaderboard",
+        "Created adminCommands.js file in the middlewares directory",
+        "Moved the admin commands code from the app.js into the adminCommands.js and set the app route in app.js to run the function in adminCommands.js"
+        // Hit 55 hours C:
     ]
 };
 
 
 
 
-/* IDEAS */
+/* TODO */
 /*
 
 {

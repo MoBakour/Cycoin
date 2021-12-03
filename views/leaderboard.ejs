@@ -25,7 +25,6 @@
         <section class="leaderboard">
             <h1 class="section-title">Leaderboard</h1>
             <div class="table-container">
-                <div class="table-border"></div>
                 <div class="table">
                     <% for (let i = 0; i < leaderboardUsers.length; i++) { %>
                         <% if (leaderboardUsers[i] == "undefined") { %>
@@ -75,6 +74,11 @@
                                 </div>
                             </div>
                         <% } %>
+                    <% } %>
+                </div>
+                <div class="table-border">
+                    <% if (leaderboardUsers.length < 1) { %>
+                        <p class="no-items-msg">No users to display</p>
                     <% } %>
                 </div>
             </div>

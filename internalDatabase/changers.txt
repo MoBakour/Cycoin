@@ -1,1 +1,1 @@
-24 splitter 250
+34 splitter 200

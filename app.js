@@ -25,6 +25,7 @@ const fs = require("fs");
 // Require Exernal Middlewares
 const User = require("./models/user.js");
 const signupValidation = require("./middlewares/signupValidation.js");
+const adminCommands = require("./middlewares/adminCommands.js");
 const generators = require("./middlewares/generators.js");
 
 // Initialize Express App
@@ -238,81 +239,15 @@ app.post("/additem", async (req, res) => {
     if (itemWeight <= 0) {
         res.json({ success: false, editError: "Weighs less than a gram? cmon" });
     } else {
-        const { userItems } = await User.findOneAndUpdate({ _id: currentUser_id }, { $push: { userItems: { itemWeight } } }, { new: true });
-        const { userCoins, userBalance } = await generators.generateCycoin(userItems, currentUser_id);
-        res.json({ success: true, dateInserted: userItems[userItems.length - 1].dateInserted, userCoins, userBalance });
+        try {
+            const { userItems } = await User.findOneAndUpdate({ _id: currentUser_id }, { $push: { userItems: { itemWeight } } }, { new: true });
+            const { userCoins, userBalance } = await generators.generateCycoin(userItems, currentUser_id);
+            res.json({ success: true, dateInserted: userItems[userItems.length - 1].dateInserted, userCoins, userBalance });
+        } catch(err) {
+            console.log(err);
+            res.json({ success: false, editError: "Failed to add item" });
+        }
     }
 });
 
-app.post("/admin-command", async (req, res) => {
-    let { command, username, password } = req.body;
-    if (username) {
-        if (username.startsWith("@")) username = username.slice(1);
-    }
-    let userExists = await checkUser("username", username);
-    let success = false;
-    let returns = null;
-    if (command.endsWith("user") && !userExists) return res.json({ success });
-    if (password == COMMAND_PASS) {
-        switch (command) {
-            case "delete-user":
-                await User.findOneAndDelete({ userName: username });
-                success = true;
-            break;
-            case "verify-user":
-                await User.findOneAndUpdate({ userName: username }, { userVerified: true });
-                success = true;
-            break;
-            case "unverify-user":
-                await User.findOneAndUpdate({ userName: username }, { userVerified: false });
-                success = true;
-            break;
-            case "clear-user":
-                await User.findOneAndUpdate({ userName: username }, { userItems: [], userCoins: 0 });
-                success = true;
-            break;
-            case "get-user":
-                const gotUser = await User.findOne({ userName: username });
-                const { userBalance } = await generators.generateCycoin(gotUser.userItems, gotUser._id);
-                returns = {
-                    Username: gotUser.userName,
-                    Gender: gotUser.userGender,
-                    Rank: gotUser.userRank,
-                    Items: gotUser.userItems.length,
-                    Coins: gotUser.userCoins,
-                    Balance: userBalance,
-                    Created: gotUser.createdAt
-                };
-                success = true;
-            break;
-            case "get-changers":
-                const data = fs.readFileSync("internalDatabase/changers.txt", { encoding: "utf-8" });
-                if (data) {
-                    let arrangedData = data.split(" splitter ");
-                    returns = {
-                        Rand: arrangedData[0],
-                        User_Rate: arrangedData[1]
-                    };
-                    success = true;
-                }
-            break;
-            case "generate-changers":
-                await generators.generateChangers();
-                success = true;
-            break;
-            case "generate-ranking":
-                await generators.generateRanking();
-                success = true;
-            break;
-            case "generate":
-                await generators.generateChangers();
-                await generators.generateRanking();
-                success = true;
-            break;
-            case "test":
-                success = true;
-            break;
-        }
-    }
-    res.json({ success, returns });
-});
+app.post("/admin-command", (req, res) => { adminCommands(req, res, checkUser, COMMAND_PASS) });
