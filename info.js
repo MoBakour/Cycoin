@@ -10,7 +10,7 @@ const projct_info = {
         "Mohamad Khalil Musharbek (Argent) - Physical Model Developer"
     ],
     project_technologies: ["HTML", "CSS", "JavaScript", "Node.js", "Express.js", "EJS", "JWT", "Heroku Hosting", "Font Awesome", "Google Fonts"],
-    development_duration: "55:30:00 (yet)",
+    development_duration: "58:20:00 (yet)",
     development_start: "22 Oct, 2021",
     development_end: null
 };
@@ -272,6 +272,14 @@ const project_updates = {
         "Created adminCommands.js file in the middlewares directory",
         "Moved the admin commands code from the app.js into the adminCommands.js and set the app route in app.js to run the function in adminCommands.js"
         // Hit 55 hours C:
+    ],
+    "4 Dec, 2021": [
+        "Wrote the info section content",
+        "Created the info section in the app.ejs file",
+        "Worked on styling the info section",
+        "Created the confirmation alert, completed styling it and making it functional",
+        "Applied confirmation alert when logging out",
+        "Did some modifications to the editAccount() function mechanism to meet the reuirements of the confirmation alert mechanism"
     ]
 };
 
@@ -282,12 +290,10 @@ const project_updates = {
 /*
 
 {
-    1- Confirmation messages when deleting account, or logging out
-    2- Load more users in the leaderboard
-    3- Load more items in my-items list
-    4- Add userCountry
-    5- Create the info section
-    6- Make the application responsive
+    1- Load more users in the leaderboard
+    2- Load more items in my-items list
+    3- Create the info section
+    4- Make the application responsive
 }
 
 */

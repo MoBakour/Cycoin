@@ -73,7 +73,8 @@ function clearEditPopups() {
 }
 
 /* Send Edit User Account Request */
-function editAccount(self, edit) {
+function editAccount(selfId, edit) {
+    let self = document.querySelector(`#${selfId}`);
     let username = password = confirmPassword = newPassword = editError = null;
     let refreshPage = logUserOut = false;
     switch (edit) {

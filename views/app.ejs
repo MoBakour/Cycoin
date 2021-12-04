@@ -8,6 +8,14 @@
         <script>
             document.querySelector(".preload").classList.remove("preload");
         </script>
+        <!-- Confirmation Alert -->
+        <div class="conf-alert">
+            <p class="conf-alert-txt"></p>
+            <div class="btns">
+                <button onclick="alertConfirm()">Yes</button>
+                <button onclick="alertCancel()">Cancel</button>
+            </div>
+        </div>
         <!-- Header -->
         <header class="app-header">
             <img src="images/logo.svg" alt="Website Logo" class="web-logo">
@@ -89,7 +97,7 @@
                         <i class="fas fa-user"></i>
                         <p>Account</p>
                     </button>
-                    <button class="settings-option dangerous-text" onclick="logout()">
+                    <button class="settings-option dangerous-text" onclick="openAlert('Are you sure you want to logout?', logout)">
                         <i class="fas fa-sign-out-alt"></i>
                         <p>Logout</p>
                     </button>
@@ -124,6 +132,39 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+        <!-- Info Section -->
+        <section class="info">
+            <div class="info-div">
+                <h1>About Cycoin</h1>
+                <article>
+                    <h2>What is cycoin?</h2>
+                    <p>
+                        Cycoin is the result of the contribution of a group of 5 senior students from grade 12B1 of the academic 
+                        year 2021/2022 in Alwahda Private School, as a project for the economy subject integrating between economy, 
+                        finance, and technology.
+                    </p>
+                </article>
+                <article>
+                    <h2>Project idea</h2>
+                    <p>
+                        The idea is a smart recycling waste container that encourages people to recycle their wastes by filling their 
+                        account with money each time they recycle something depending on the weight and the number of items they have recycled.
+                    </p>
+                </article>
+                <article>
+                    <h2>More in details</h2>
+                    <p>
+                        The project consists of a waste bin with a scale attached to it, in addition to a control tablet, resulting in a 
+                        smart bin. People are required to create an account through the Cycoin application using the tablet on the bin. 
+                        And each time they want to recycle an item, they will have to login with the username and the password of their accounts.
+                        <br><br>
+                        To encourage people more, a leaderboard in included in the application, so the more people recycle, the higher they 
+                        will be placed on the leaderboard list, creating some kind of competition where people will have to recycle so that 
+                        they can win and be the top.
+                    </p>
+                </article>
             </div>
         </section>
         <!-- My Items Section -->
@@ -169,7 +210,7 @@
             <h1>Edit Username</h1>
             <input type="text" placeholder="New Username">
             <input type="password" placeholder="Enter Password">
-            <button onclick="editAccount(this, 'username')">Change Username <i class="fas fa-edit"></i></button>
+            <button id="editUsernameBtn" onclick="editAccount(this.id, 'username')">Change Username <i class="fas fa-edit"></i></button>
             <p class="edit-error-field"></p>
         </div>
         <div class="edit-password popup">
@@ -177,14 +218,14 @@
             <input type="password" placeholder="Original Password">
             <input type="password" placeholder="New Password">
             <input type="password" placeholder="Confirm Password">
-            <button onclick="editAccount(this, 'password')">Change Password <i class="fas fa-edit"></i></button>
+            <button id="editPasswordBtn" onclick="editAccount(this.id, 'password')">Change Password <i class="fas fa-edit"></i></button>
             <p class="edit-error-field"></p>
         </div>
         <div class="edit-delete popup">
             <h1 class="dangerous-text">Delete Account</h1>
             <input type="text" placeholder="Enter Username">
             <input type="password" placeholder="Enter Password">
-            <button onclick="editAccount(this, 'delete')" class="dangerous-button">Delete Account</button>
+            <button id="editDeleteBtn" onclick="editAccount(this.id, 'delete')" class="dangerous-button">Delete Account</button>
             <p class="edit-error-field"></p>
         </div>
         <!-- Add Item Popup -->

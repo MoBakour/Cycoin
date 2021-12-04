@@ -99,6 +99,7 @@ a, a:active {
     cursor: pointer;
     transition: var(--transition);
     display: none;
+    user-select: none;
 }
 .back-btn:hover {
     opacity: .7;
@@ -300,6 +301,7 @@ a, a:active {
     margin-right: 40px;
     cursor: pointer;
     transition: var(--transition);
+    user-select: none;
 }
 .app-header nav li:hover {
     opacity: .5;
@@ -645,6 +647,48 @@ a, a:active {
     font-weight: bold;
     font-size: 18px;
     display: none;
+}
+
+/* Info Section */
+.selector {} /* TO BE REMOVED */
+
+/* Confirmation Alert */
+.conf-alert {
+    min-width: 240px;
+    max-width: 300px;
+    padding: 20px;
+    color: var(--white);
+    font-size: 22px;
+    background-color: var(--error-color);
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 4;
+    transition: var(--transition);
+}
+.conf-alert-opened {
+    transform: translate(-50%, -50%) scale(1);
+}
+.conf-alert .btns {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.conf-alert .btns button {
+    background-color: var(--white);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: var(--opacity-transition);
+}
+.conf-alert .btns button:hover {
+    opacity: .8;
 }
 
 /* Darken Mode */
