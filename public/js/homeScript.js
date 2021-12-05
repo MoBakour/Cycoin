@@ -110,7 +110,7 @@ const allSuErrorFields = document.querySelectorAll(".signup-form .form-error-for
 // Send Request
 signupBtn.addEventListener("click", () => {
     // Get Checked Gender
-    let checkedGender;
+    let checkedGender = "";
     genderRadios.forEach(input => {
         if (input.checked) {
             checkedGender = input.id;

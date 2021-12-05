@@ -33,7 +33,7 @@ function admin_command(command, username, password) {
 // Confirmation Alert
 const confAlert = document.querySelector(".conf-alert");
 const confAlertTxt = document.querySelector(".conf-alert-txt");
-const confDarken = document.querySelector(".darken");
+const confDarken = document.querySelector(".conf-darken");
 let doFunc = null;
 function openAlert(txt, funcToDo) {
     confAlertTxt.innerText = txt;

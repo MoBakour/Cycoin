@@ -10,7 +10,7 @@ const projct_info = {
         "Mohamad Khalil Musharbek (Argent) - Physical Model Developer"
     ],
     project_technologies: ["HTML", "CSS", "JavaScript", "Node.js", "Express.js", "EJS", "JWT", "Heroku Hosting", "Font Awesome", "Google Fonts"],
-    development_duration: "58:20:00 (yet)",
+    development_duration: "60:00:00 (yet)",
     development_start: "22 Oct, 2021",
     development_end: null
 };
@@ -279,7 +279,14 @@ const project_updates = {
         "Worked on styling the info section",
         "Created the confirmation alert, completed styling it and making it functional",
         "Applied confirmation alert when logging out",
-        "Did some modifications to the editAccount() function mechanism to meet the reuirements of the confirmation alert mechanism"
+        "Did some modifications to the editAccount() function mechanism to meet the reuirements of the confirmation alert mechanism",
+        "Did a small change in the client-side console messages text"
+    ],
+    "5 Dec, 2021": [
+        "Modified the account editing system (delete account) mechanism to be compatible with the confirmation alert implementation",
+        "Implemented the confirmation alert on account deleting process",
+        "Initially completed the info section and designed it",
+        "Fixed a bug in the signup validation process that caused some errors to not to be displayed for users"
     ]
 };
 
@@ -290,10 +297,7 @@ const project_updates = {
 /*
 
 {
-    1- Load more users in the leaderboard
-    2- Load more items in my-items list
-    3- Create the info section
-    4- Make the application responsive
+    1- Make the application responsive
 }
 
 */

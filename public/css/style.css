@@ -50,6 +50,15 @@ a, a:active {
     text-decoration: none;
 }
 
+/* Scrollbars */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--color-one);
+    border-radius: 20px;
+}
+
 /* Icons */
 .fas.fa-crown {
     color: goldenrod
@@ -650,7 +659,49 @@ a, a:active {
 }
 
 /* Info Section */
-.selector {} /* TO BE REMOVED */
+.info {
+    margin-top: 30px;
+    height: calc(100vh - 130px);
+    min-height: unset !important;
+    overflow-y: auto;
+}
+.info-div {
+    padding: 20px;
+    background-color: rgba(255,255,255,.2);
+    border-radius: 16px;
+    margin-bottom: 50px;
+}
+.info h1 {
+    font-size: 40px;
+    padding-bottom: 16px;
+}
+.info h2 {
+    font-size: 30px;
+    padding-bottom: 8px;
+}
+.info h2::before {
+    content: "- ";
+}
+.info p {
+    font-size: 22px;
+    margin-bottom: 40px;
+}
+.info article,
+.info p {
+    padding-left: 30px;
+}
+.info h3 {
+    font-size: 30px;
+    color: yellow;
+    padding: 20px 0;
+}
+.info h3 span {
+    background-color: crimson;
+    color: var(--white);
+    border-radius: 50px;
+    padding: 5px 12px;
+    margin-left: 20px;
+}
 
 /* Confirmation Alert */
 .conf-alert {
@@ -692,7 +743,7 @@ a, a:active {
 }
 
 /* Darken Mode */
-.darken {
+.darken, .conf-darken {
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -707,6 +758,9 @@ a, a:active {
     opacity: .7;
     z-index: 2;
 }
+.conf-darken.darken-active {
+    z-index: 3;
+}
 
 /* Table Format */
 .table-container {
@@ -719,13 +773,6 @@ a, a:active {
     overflow-y: auto;
     overflow-x: hidden;
     border: 3px solid transparent;
-}
-.table-container::-webkit-scrollbar {
-    width: 10px;
-}
-.table-container::-webkit-scrollbar-thumb {
-    background-color: var(--color-one);
-    border-radius: 20px;
 }
 .table {
     margin-right: 20px;

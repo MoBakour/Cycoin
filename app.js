@@ -152,6 +152,7 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/signup", async (req, res) => {
+    if (!req.body.userGender) req.body.userGender = "";
     let errorsObject = await signupValidation(req.body);
     try {
         for (error in errorsObject) {
@@ -226,10 +227,19 @@ app.post("/edit", async (req, res) => {
             if (!comparePassword) editError = "Not your password, who's account r u tryna delete? ha?";
             if (username != currentUser_info.userName) editError = "Can't you tell your own username?";
             if (editError != "") return res.status(400).json({ success: false, editError });
-            await User.findOneAndDelete({ _id: currentUser_id });
         break;
     }
     res.status(200).json({ success: true });
+});
+
+app.post('/deleteaccount', async (req, res) => {
+    try {
+        await User.findOneAndDelete({ _id: currentUser_id });
+        res.status(200).json({ success: true });
+    } catch(err) {
+        console.log(err);
+        res.status(400).json({ success: false });
+    }
 });
 
 app.post("/additem", async (req, res) => {

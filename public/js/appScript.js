@@ -72,11 +72,19 @@ function clearEditPopups() {
     });
 }
 
+// Set Success Edit Messages
+let editError = null;
+function successEditMessage() {
+    editError.style.display = "block";
+    editError.style.color = "lime";
+    editError.innerText = "All good! one sec";
+}
+
 /* Send Edit User Account Request */
 function editAccount(selfId, edit) {
     let self = document.querySelector(`#${selfId}`);
-    let username = password = confirmPassword = newPassword = editError = null;
-    let refreshPage = logUserOut = false;
+    let username = password = confirmPassword = newPassword = null;
+    let refreshPage = activateDarken = false;
     switch (edit) {
         case "username":
             username = self.parentElement.children[1].value;
@@ -89,12 +97,12 @@ function editAccount(selfId, edit) {
             newPassword = self.parentElement.children[2].value;
             confirmPassword = self.parentElement.children[3].value;
             editError = document.querySelector(".edit-password .edit-error-field");
+            activateDarken = true;
         break;
         case "delete":
             username = self.parentElement.children[1].value;
             password = self.parentElement.children[2].value;
             editError = document.querySelector(".edit-delete .edit-error-field");
-            logUserOut = true;
         break;
     }
     fetch("/edit", {
@@ -114,21 +122,35 @@ function editAccount(selfId, edit) {
             editError.style.display = "block";
             return editError.innerText = data.editError;
         } else {
-            editError.style.display = "block";
-            editError.style.color = "lime";
-            editError.innerText = "All good! one sec";
+            if (edit == "delete") {
+                openAlert("Are you sure you want to delete your account?", deleteAccount);
+            } else {
+                successEditMessage();
+            }
             setTimeout(() => {
-                if (logUserOut) {
-                    logout();
-                } else if (refreshPage) {
-                    location.reload();
-                } else {
-                    darken.click();
-                }
+                if (refreshPage) location.reload();
+                if (activateDarken) darken.click();
             }, 800);
         }
     })
     .catch(err => console.log(err));
+}
+
+/* Send Delete Account Request */
+function deleteAccount() {
+    fetch("/deleteaccount", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            successEditMessage();
+            setTimeout(() => {
+                logout();
+            }, 800);
+        }
+    });
 }
 
 /* Send Add Item Request */
