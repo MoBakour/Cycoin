@@ -10,7 +10,7 @@ const projct_info = {
         "Mohamad Khalil Musharbek (Argent) - Physical Model Developer"
     ],
     project_technologies: ["HTML", "CSS", "JavaScript", "Node.js", "Express.js", "EJS", "JWT", "Heroku Hosting", "Font Awesome", "Google Fonts"],
-    development_duration: "60:00:00 (yet)",
+    development_duration: "60:30:00 (yet)",
     development_start: "22 Oct, 2021",
     development_end: null
 };
@@ -287,6 +287,11 @@ const project_updates = {
         "Implemented the confirmation alert on account deleting process",
         "Initially completed the info section and designed it",
         "Fixed a bug in the signup validation process that caused some errors to not to be displayed for users"
+        // Technically, main application development is completed, responsive design implementation is left
+    ],
+    "6 Dec, 2021": [
+        "Started working on the responsive design of the application",
+        "Completed the responsive design for the home page"
     ]
 };
 
@@ -297,7 +302,8 @@ const project_updates = {
 /*
 
 {
-    1- Make the application responsive
+    1- Protect requesting buttons from mass clicking 
+    2- Make the application responsive
 }
 
 */

@@ -1,1 +1,25 @@
-/* Empty */
+/* Application Responsive Design */
+
+@media (max-width: 500px) {
+    .home-section .text-part {
+        transform: scale(.7);
+    }
+    .home-section .btns-part {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .home-section .btns-part button:first-child {
+        margin-bottom: 20px;
+    }
+    .form-format {
+        width: 260px;
+    }
+    .form-format .form-content input:not(.form-format .form-content input[type="radio"]),
+    .password-input {
+        width: 100%;
+    }
+    .form-error-format {
+        font-size: 14px;
+    }
+}

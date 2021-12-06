@@ -19,7 +19,7 @@ body {
     transition: var(--bg-transition);
 }
 section:not(.home-sections) {
-    min-height: calc(100vh - 100px);
+    height: calc(100vh - 100px);
     width: 90%;
     color: var(--color-one);
     position: absolute;
@@ -661,8 +661,7 @@ a, a:active {
 /* Info Section */
 .info {
     margin-top: 30px;
-    height: calc(100vh - 130px);
-    min-height: unset !important;
+    height: calc(100vh - 130px) !important;
     overflow-y: auto;
 }
 .info-div {
