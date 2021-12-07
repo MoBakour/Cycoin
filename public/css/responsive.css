@@ -1,5 +1,28 @@
 /* Application Responsive Design */
 
+@media (max-width: 1120px) {
+    .table-container {
+        padding: 10px 0;
+        width: 100%;
+    }
+}
+
+@media (max-width: 700px) {
+    .element-number {
+        font-size: 22px;
+    }
+    .table-element {
+        font-size: 18px;
+    }
+    .table-element i {
+        font-size: 21px;
+    }
+    .table-element img {
+        width: 30px;
+        margin-right: 8px;
+    }
+}
+
 @media (max-width: 500px) {
     .home-section .text-part {
         transform: scale(.7);
@@ -21,5 +44,27 @@
     }
     .form-error-format {
         font-size: 14px;
+    }
+    .section-title {
+        font-size: 40px;
+    }
+    .no-items-msg {
+        font-size: 20px;
+    }
+    .table-border {
+        top: 70px;
+    }
+    .element-number {
+        font-size: 18px;
+    }
+    .table-element {
+        font-size: 14px;
+    }
+    .table-element i {
+        font-size: 16px;
+    }
+    .table-element img {
+        width: 24px;
+        margin-right: 6px;
     }
 }

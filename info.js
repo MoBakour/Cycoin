@@ -3,14 +3,14 @@ const projct_info = {
     project_description: "Web application for technological recycling waste container",
     project_version: "V_DEV",
     project_contributers: [
+        "Khalifa Khalid Alshamsi (Khxloof) - Cycoin CEO",
         "Mohamad Saif Bakour (Swordax) - Web Application Developer",
-        "Khalifa Khalid Alsahmsi (Khxloof) - Digital Model Developer",
         "Zayed Jumaa Alali (Zackie) - Digital Model Developer",
         "Salem Shehab Alqasimi (Wizper) - Physical Model Developer",
         "Mohamad Khalil Musharbek (Argent) - Physical Model Developer"
     ],
-    project_technologies: ["HTML", "CSS", "JavaScript", "Node.js", "Express.js", "EJS", "JWT", "Heroku Hosting", "Font Awesome", "Google Fonts"],
-    development_duration: "60:30:00 (yet)",
+    project_technologies: ["HTML", "CSS", "JavaScript", "NodeJS", "Express.js", "EJS", "JWT", "Heroku Hosting", "Font Awesome", "Google Fonts"],
+    development_duration: "61:30:00 (yet)",
     development_start: "22 Oct, 2021",
     development_end: null
 };
@@ -291,7 +291,11 @@ const project_updates = {
     ],
     "6 Dec, 2021": [
         "Started working on the responsive design of the application",
-        "Completed the responsive design for the home page"
+        "Completed the responsive design of the home page"
+    ],
+    "7 Dec, 2021": [
+        "Completed the responsive design of the leaderboard page",
+        "Did some small changes in the project_info variable content in the info.js file"
     ]
 };
 
@@ -302,7 +306,7 @@ const project_updates = {
 /*
 
 {
-    1- Protect requesting buttons from mass clicking 
+    1- Protect requesting buttons from mass clicking
     2- Make the application responsive
 }
 

@@ -763,7 +763,7 @@ a, a:active {
 
 /* Table Format */
 .table-container {
-    width: calc(100% - 20px);
+    width: calc(90% - 20px);
     max-width: calc(900px - 20px);
     height: 380px;
     padding: 10px;
@@ -830,7 +830,7 @@ a, a:active {
 .element-number {
     width: calc(10% - 20px);
     padding-right: 20px;
-    font-size: 30px !important;
+    font-size: 30px;
     text-align: center;
     display: block !important;
 }
@@ -839,6 +839,11 @@ a, a:active {
 }
 .element-username {
     width: 50%;
+}
+.element-username p {
+    width: 230px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .element-coins {
     width: 20%;
