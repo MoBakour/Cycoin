@@ -1,6 +1,8 @@
 # Cycoin
 
-![Cycoin Logo](/public/images/logo.svg)
+<img alt="Cycoin Logo" width="160" src="/public/images/logo.svg">
+
+**_V1.0.0_**
 
 ## About
 
