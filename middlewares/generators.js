@@ -7,7 +7,7 @@ let usersCount, usersNumber;
 async function getUsersCount() {
     usersCount = await User.count();
     usersNumber = usersCount <= 100 ? usersCount : 100;
-};
+}
 
 // Generate Ranking Function
 async function generateRanking() {
@@ -43,8 +43,8 @@ async function generateLeaderboard() {
 
 // Fill Changers File
 async function generateChangers() {
-    let rand_chng = Math.floor(Math.random() * (40 - 20 + 1) ) + 20;
-    let useRate_chng = [200,250,300,350,400][Math.floor(Math.random() * 5)];
+    let rand_chng = Math.floor(Math.random() * (40 - 20 + 1)) + 20;
+    let useRate_chng = [200, 250, 300, 350, 400][Math.floor(Math.random() * 5)];
     let newChangers = `${rand_chng} splitter ${useRate_chng}`;
     fs.writeFileSync("internalDatabase/changers.txt", newChangers);
     return newChangers;
@@ -59,22 +59,26 @@ async function generateCycoin(items, userId) {
     }
 
     // generate changers
-    let data = fs.readFileSync("internalDatabase/changers.txt", { encoding: "utf-8" });
+    let data = fs.readFileSync("internalDatabase/changers.txt", {
+        encoding: "utf-8",
+    });
     if (data == "" || data == "prevalue") {
         data = await generateChangers();
     }
     let changersArr = data.split(" splitter ");
     let changers = {
         rand: changersArr[0],
-        useRate: changersArr[1]
-    }
+        useRate: changersArr[1],
+    };
 
     // coins
-    let userCoins = Math.round((grams / 10) + items.length);
-    
+    let userCoins = Math.round(grams / 10 + items.length);
+
     // balance
-    let userBalance = (userCoins * (changers.rand / changers.useRate)).toFixed(2);
-    
+    let userBalance = (userCoins * (changers.rand / changers.useRate)).toFixed(
+        2
+    );
+
     // function outputs
     await User.findByIdAndUpdate(userId, { userCoins });
     return { userCoins, userBalance };
@@ -85,5 +89,5 @@ module.exports = {
     generateRanking,
     generateLeaderboard,
     generateChangers,
-    generateCycoin
-}
+    generateCycoin,
+};

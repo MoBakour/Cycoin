@@ -15,8 +15,8 @@ let lightTheme = {
     black: "black",
     blue: "#9CCFDF",
     green: "#9CDFAB",
-    green_two: "#A1FFB6"
-}
+    green_two: "#A1FFB6",
+};
 let darkTheme = {
     bg_color: "#004F45",
     color_one: "white",
@@ -28,8 +28,8 @@ let darkTheme = {
     black: "black",
     blue: "#9CCFDF",
     green: "#9CDFAB",
-    green_two: "#03675B"
-}
+    green_two: "#03675B",
+};
 
 // set themes default theme
 let currentTheme = localStorage.getItem("theme") || "dark";
@@ -42,7 +42,7 @@ if (themeSwitch) {
     if (currentTheme == "dark") {
         themeSwitch.classList.add("dark-theme-on");
         themeSwitchStatus.innerText = "On";
-    };
+    }
     themeSwitch.addEventListener("click", () => {
         if (currentTheme == "light") {
             currentTheme = "dark";

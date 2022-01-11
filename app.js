@@ -49,12 +49,13 @@ let COMMAND_PASS = process.env.COMMAND_PASS;
 let currentUser, currentUser_id, currentUser_info, loggedIn;
 
 // Connect to Database & Listen to Server Requests
-mongoose.connect(DB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-.then(result => app.listen(PORT))
-.catch(err => console.log(err));
+mongoose
+    .connect(DB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then((result) => app.listen(PORT))
+    .catch((err) => console.log(err));
 
 // Check Token On Each Request
 app.use(async (req, res, next) => {
@@ -81,7 +82,7 @@ function checkAuth(req, res, next) {
     if (loggedIn) {
         next();
     } else {
-        res.render("home",  { user: currentUser_info });
+        res.render("home", { user: currentUser_info });
     }
 }
 
@@ -91,10 +92,10 @@ async function checkUser(cred_type, cred) {
     switch (cred_type) {
         case "id":
             check = await User.exists({ _id: cred });
-        break;
+            break;
         case "username":
             check = await User.exists({ userName: cred });
-        break;
+            break;
     }
     return check;
 }
@@ -102,7 +103,9 @@ async function checkUser(cred_type, cred) {
 // Create JWT Token
 async function createToken(req, res, userId) {
     let expireLimit = 60 * 60 * 24 * 3;
-    const token = await jwt.sign({ userId }, SECRET, { expiresIn: expireLimit });
+    const token = await jwt.sign({ userId }, SECRET, {
+        expiresIn: expireLimit,
+    });
     res.cookie("jwt", token, { httpOnly: true, maxAge: expireLimit * 1000 });
 }
 
@@ -113,7 +116,10 @@ setInterval(generators.generateRanking, 1000 * 60 * 5);
 // Server Requests
 // GET Requests
 app.get("/", checkAuth, async (req, res) => {
-    let { userBalance } = await generators.generateCycoin(currentUser_info.userItems, currentUser_id);
+    let { userBalance } = await generators.generateCycoin(
+        currentUser_info.userItems,
+        currentUser_id
+    );
     res.render("app", { user: currentUser_info, userBalance });
 });
 app.get("/leaderboard", async (req, res) => {
@@ -138,14 +144,15 @@ app.post("/login", async (req, res) => {
         let loginErrors = {
             usernameError: "",
             passwordError: "",
-            serverError: ""
-        }
+            serverError: "",
+        };
         if (err.message == "Who's dat? idk him") {
             loginErrors.usernameError = err.message;
         } else if (err.message == "Bad guess :/ try again") {
             loginErrors.passwordError = err.message;
         } else {
-            loginErrors.serverError = "SERVER_ERROR\nI'm really sorry for that :(\nPlease refresh the page and try again";
+            loginErrors.serverError =
+                "SERVER_ERROR\nI'm really sorry for that :(\nPlease refresh the page and try again";
         }
         res.status(400).json({ success: false, loginErrors });
     }
@@ -165,16 +172,17 @@ app.post("/signup", async (req, res) => {
             userPassword: req.body.userPassword,
             userGender: req.body.userGender,
             userVerified: false,
-            userRank: await User.count() + 1,
+            userRank: (await User.count()) + 1,
             userItems: [],
-            userCoins: 0
-        }
+            userCoins: 0,
+        };
         const { _id } = await User.create(userStructure);
         await createToken(req, res, _id.toString());
         res.status(200).json({ success: true });
-    } catch(err) {
+    } catch (err) {
         if (err.code == 11000) {
-            errorsObject.userNameError = "Someone took this username before you";
+            errorsObject.userNameError =
+                "Someone took this username before you";
         }
         if (err.code !== 11000 && err.message !== "User validation failed") {
             console.log(err);
@@ -184,59 +192,85 @@ app.post("/signup", async (req, res) => {
 });
 
 app.post("/logout", (req, res) => {
-    res.cookie("jwt", "", { httpOnly: true, maxAge: 0 }).json({ success: true });
+    res.cookie("jwt", "", { httpOnly: true, maxAge: 0 }).json({
+        success: true,
+    });
 });
 
 app.post("/edit", async (req, res) => {
     let { edit, username, password, newPassword, confirmPassword } = req.body;
     let userExists = await checkUser("id", currentUser_id);
-    if (!userExists) return res.status(400).json({ success: false, editError: "Process failed, refresh the page" });
+    if (!userExists)
+        return res.status(400).json({
+            success: false,
+            editError: "Process failed, refresh the page",
+        });
     let originalPassword = currentUser_info.userPassword;
     let editError = "";
     let comparePassword, compareNew;
     comparePassword = await bcrypt.compare(password, originalPassword);
     switch (edit) {
         case "username":
-            let { userNameError } = await signupValidation({ userName: username });
+            let { userNameError } = await signupValidation({
+                userName: username,
+            });
             editError = userNameError;
-            if (username == currentUser_info.userName) editError = "Same username doe?";
+            if (username == currentUser_info.userName)
+                editError = "Same username doe?";
             if (!comparePassword) editError = "Not your password? u a thief?";
-            if (editError != "") return res.status(400).json({ success: false, editError });
+            if (editError != "")
+                return res.status(400).json({ success: false, editError });
             try {
-                await User.findOneAndUpdate({ _id: currentUser_id }, { userName: username });
-            } catch(err) {
+                await User.findOneAndUpdate(
+                    { _id: currentUser_id },
+                    { userName: username }
+                );
+            } catch (err) {
                 if (err.code == 11000) {
                     editError = "Someone took that username before you";
                     return res.status(400).json({ success: false, editError });
                 }
             }
-        break;
+            break;
         case "password":
             compareNew = await bcrypt.compare(newPassword, originalPassword);
             if (compareNew) editError = "Same password doe?";
-            let { userPasswordError, userPasswordConfirmationError } = await signupValidation({ userPassword: newPassword, userPasswordConfirmation: confirmPassword });
-            if (userPasswordConfirmationError !== "") editError = userPasswordConfirmationError;
+            let { userPasswordError, userPasswordConfirmationError } =
+                await signupValidation({
+                    userPassword: newPassword,
+                    userPasswordConfirmation: confirmPassword,
+                });
+            if (userPasswordConfirmationError !== "")
+                editError = userPasswordConfirmationError;
             if (userPasswordError !== "") editError = userPasswordError;
             if (!comparePassword) editError = "Not your password, u a thief?";
-            if (editError != "") return res.status(400).json({ success: false, editError });
+            if (editError != "")
+                return res.status(400).json({ success: false, editError });
             let salt = await bcrypt.genSalt();
             newPassword = await bcrypt.hash(newPassword, salt);
-            await User.findOneAndUpdate({ _id: currentUser_id }, { userPassword: newPassword });
-        break;
+            await User.findOneAndUpdate(
+                { _id: currentUser_id },
+                { userPassword: newPassword }
+            );
+            break;
         case "delete":
-            if (!comparePassword) editError = "Not your password, who's account r u tryna delete? ha?";
-            if (username != currentUser_info.userName) editError = "Can't you tell your own username?";
-            if (editError != "") return res.status(400).json({ success: false, editError });
-        break;
+            if (!comparePassword)
+                editError =
+                    "Not your password, who's account r u tryna delete? ha?";
+            if (username != currentUser_info.userName)
+                editError = "Can't you tell your own username?";
+            if (editError != "")
+                return res.status(400).json({ success: false, editError });
+            break;
     }
     res.status(200).json({ success: true });
 });
 
-app.post('/deleteaccount', async (req, res) => {
+app.post("/deleteaccount", async (req, res) => {
     try {
         await User.findOneAndDelete({ _id: currentUser_id });
         res.status(200).json({ success: true });
-    } catch(err) {
+    } catch (err) {
         console.log(err);
         res.status(400).json({ success: false });
     }
@@ -245,19 +279,40 @@ app.post('/deleteaccount', async (req, res) => {
 app.post("/additem", async (req, res) => {
     let itemWeight = req.body.weight;
     let userExists = await checkUser("id", currentUser_id);
-    if (!userExists) return res.status(400).json({ success: false, editError: "Failed to add item, refresh the page" });
+    if (!userExists)
+        return res.status(400).json({
+            success: false,
+            editError: "Failed to add item, refresh the page",
+        });
     if (itemWeight <= 0) {
-        res.json({ success: false, editError: "Weighs less than a gram? cmon" });
+        res.json({
+            success: false,
+            editError: "Weighs less than a gram? cmon",
+        });
     } else {
         try {
-            const { userItems } = await User.findOneAndUpdate({ _id: currentUser_id }, { $push: { userItems: { itemWeight } } }, { new: true });
-            const { userCoins, userBalance } = await generators.generateCycoin(userItems, currentUser_id);
-            res.json({ success: true, dateInserted: userItems[userItems.length - 1].dateInserted, userCoins, userBalance });
-        } catch(err) {
+            const { userItems } = await User.findOneAndUpdate(
+                { _id: currentUser_id },
+                { $push: { userItems: { itemWeight } } },
+                { new: true }
+            );
+            const { userCoins, userBalance } = await generators.generateCycoin(
+                userItems,
+                currentUser_id
+            );
+            res.json({
+                success: true,
+                dateInserted: userItems[userItems.length - 1].dateInserted,
+                userCoins,
+                userBalance,
+            });
+        } catch (err) {
             console.log(err);
             res.json({ success: false, editError: "Failed to add item" });
         }
     }
 });
 
-app.post("/admin-command", (req, res) => { adminCommands(req, res, checkUser, COMMAND_PASS) });
+app.post("/admin-command", (req, res) => {
+    adminCommands(req, res, checkUser, COMMAND_PASS);
+});

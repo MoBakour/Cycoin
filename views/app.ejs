@@ -18,59 +18,107 @@
         </div>
         <!-- Header -->
         <header class="app-header">
-            <img src="images/logo.svg" alt="Website Logo" class="web-logo">
+            <img src="images/logo.svg" alt="Website Logo" class="web-logo" />
             <nav>
                 <ul>
                     <a href="/leaderboard"><li>leaderboard</li></a>
                     <li onclick="openSection('settings');">settings</li>
                     <li onclick="openSection('info');">info</li>
                 </ul>
-                <div class="back-btn app-back-btn" onclick="openSection('dashboard');">
+                <div
+                    class="back-btn app-back-btn"
+                    onclick="openSection('dashboard');"
+                >
                     <p>Back</p>
                     <i class="fas fa-long-arrow-alt-left"></i>
                 </div>
             </nav>
         </header>
         <!-- Dashboard Section -->
-        <section class="dashboard section-opened">
+        <section
+            class="dashboard section-opened"
+            style="height: auto; overflow: visible"
+        >
             <div class="left dashboard-info">
                 <div class="user-info">
                     <% if (user.userGender == "female") { %>
-                        <img src="images/female.png" alt="Male Avatar" class="user-avatar">
+                    <img
+                        src="images/female.png"
+                        alt="Male Avatar"
+                        class="user-avatar"
+                    />
                     <% } else { %>
-                        <img src="images/male.png" alt="Female Avatar" class="user-avatar">
+                    <img
+                        src="images/male.png"
+                        alt="Female Avatar"
+                        class="user-avatar"
+                    />
                     <% } %>
-                    <p class="user-name">@<%= user.userName %></p>
+                    <p class="user-name" title="@<%= user.userName %>">
+                        @<%= user.userName %>
+                    </p>
                     <% if (user.userVerified) { %>
-                        <i class="fas fa-medal verification-sign" title="Verified User"></i>
+                    <i
+                        class="fas fa-medal verification-sign"
+                        title="Verified User"
+                    ></i>
                     <% } %>
                 </div>
                 <div class="user-statistics">
-                    <div class="stat-element stat-rank" title="<%= user.userRank %>">
+                    <div
+                        class="stat-element stat-rank"
+                        title="<%= user.userRank %>"
+                    >
                         <div class="stat-type">
                             <i class="fas fa-crown"></i>
                             <p>Rank</p>
                         </div>
-                        <div class="stat-content number-formatter" data-number="<%= user.userRank %>" data-format="number-int"></div>
+                        <div
+                            class="stat-content number-formatter"
+                            data-number="<%= user.userRank %>"
+                            data-format="number-int"
+                        ></div>
                     </div>
-                    <div class="stat-element stat-items" title="<%= user.userItems.length %>">
+                    <div
+                        class="stat-element stat-items"
+                        title="<%= user.userItems.length %>"
+                    >
                         <div class="stat-type">
                             <i class="fas fa-recycle"></i>
                             <p>Items</p>
                         </div>
-                        <div class="stat-content number-formatter" data-number="<%= user.userItems.length %>" data-format="number-int"></div>
+                        <div
+                            class="stat-content number-formatter"
+                            data-number="<%= user.userItems.length %>"
+                            data-format="number-int"
+                        ></div>
                     </div>
-                    <div class="stat-element stat-coins" title="<%= user.userCoins %>">
+                    <div
+                        class="stat-element stat-coins"
+                        title="<%= user.userCoins %>"
+                    >
                         <div class="stat-type">
                             <i class="fas fa-donate"></i>
                             <p>Coins</p>
                         </div>
-                        <div class="stat-content number-formatter" data-number="<%= user.userCoins %>" data-format="number"></div>
+                        <div
+                            class="stat-content number-formatter"
+                            data-number="<%= user.userCoins %>"
+                            data-format="number"
+                        ></div>
                     </div>
                 </div>
                 <div class="user-balance" title="<%= userBalance %>">
                     <p class="balance-title">Balance</p>
-                    <h1 class="balance-content"><span class="number-formatter" data-number="<%= userBalance %>" data-format="number">800</span> AED</h1>
+                    <h1 class="balance-content">
+                        <span
+                            class="number-formatter"
+                            data-number="<%= userBalance %>"
+                            data-format="number"
+                            >800</span
+                        >
+                        AED
+                    </h1>
                 </div>
             </div>
             <div class="right dashboard-btns">
@@ -86,18 +134,56 @@
         </section>
         <!-- Settings Section -->
         <section class="settings">
-            <h1 class="section-title">Settings</h1>
+            <h1 class="section-title">
+                <p>Settings</p>
+                <div class="res-settings-options">
+                    <button
+                        title="Appearance Setttings"
+                        class="res-settings-option current-option"
+                        data-btn-name="appearance"
+                        onclick="openSettings('appearance')"
+                    >
+                        <i class="fas fa-palette"></i>
+                    </button>
+                    <button
+                        title="Account Settings"
+                        class="res-settings-option"
+                        data-btn-name="account"
+                        onclick="openSettings('account')"
+                    >
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <button
+                        title="Logout"
+                        class="res-settings-option dangerous-text"
+                        onclick="openAlert('Are you sure you want to logout?', logout)"
+                    >
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </h1>
             <div class="settings-content">
                 <div class="left">
-                    <button class="settings-option current-option" onclick="openSettings(this, 'appearance')">
+                    <button
+                        class="settings-option current-option"
+                        data-btn-name="appearance"
+                        onclick="openSettings('appearance')"
+                    >
                         <i class="fas fa-palette"></i>
                         <p>Appearance</p>
                     </button>
-                    <button class="settings-option" onclick="openSettings(this, 'account')">
+                    <button
+                        class="settings-option"
+                        data-btn-name="account"
+                        onclick="openSettings('account')"
+                    >
                         <i class="fas fa-user"></i>
                         <p>Account</p>
                     </button>
-                    <button class="settings-option dangerous-text" onclick="openAlert('Are you sure you want to logout?', logout)">
+                    <button
+                        class="settings-option dangerous-text"
+                        onclick="openAlert('Are you sure you want to logout?', logout)"
+                    >
                         <i class="fas fa-sign-out-alt"></i>
                         <p>Logout</p>
                     </button>
@@ -116,18 +202,27 @@
                             <div>
                                 <div class="username-div">
                                     <p>username</p>
-                                    <button onclick="openDiv('username')"><%= user.userName %></button>
+                                    <button onclick="openDiv('username')">
+                                        <%= user.userName %>
+                                    </button>
                                 </div>
                                 <div class="password-div">
                                     <p>password</p>
-                                    <button onclick="openDiv('password')">*************</button>
+                                    <button onclick="openDiv('password')">
+                                        *************
+                                    </button>
                                 </div>
                             </div>
                         </div>
                         <div class="danger-zone">
                             <h1 class="dangerous-text">Danger zone</h1>
                             <div>
-                                <button class="delete-account-btn dangerous-button" onclick="openDiv('delete')">Delete Account</button>
+                                <button
+                                    class="delete-account-btn dangerous-button"
+                                    onclick="openDiv('delete')"
+                                >
+                                    Delete Account
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -136,46 +231,74 @@
         </section>
         <!-- Info Section -->
         <section class="info">
-            <div class="info-div">
-                <h1>About Cycoin</h1>
-                <article>
-                    <h2>What is cycoin?</h2>
-                    <p>
-                        Cycoin is an economy subject project done by a group of Al Wahda Private School senior students of grade 12B1, 
-                        year 2021/2022. The project should be a result of integrating multiple subjects with each other, economy, finance, 
-                        and technology.
-                    </p>
-                </article>
-                <article>
-                    <h2>Project idea</h2>
-                    <p>
-                        The idea is a smart recycling waste container that encourages people to recycle their wastes by filling their 
-                        account with money each time they recycle something depending on the weight and the number of items they have recycled.
-                    </p>
-                </article>
-                <article>
-                    <h2>More in details</h2>
-                    <p>
-                        The project consists of a waste bin with a scale attached to it, in addition to a control tablet, resulting in a 
-                        smart bin. People are required to create an account through the Cycoin application using the tablet on the bin. 
-                        And each time they want to recycle an item, they will have to login with the username and the password of their accounts.
-                        <br><br>
-                        To encourage people more, a leaderboard in included in the application, so the more people recycle, the higher they 
-                        will be placed on the leaderboard list, creating some kind of competition where people will have to recycle so that 
-                        they can win and be the top.
-                    </p>
-                </article>
-            </div>
-            <div class="info-div">
-                <h1>Cycoin Team</h1>
-                <article>
-                    <h3>Khalifa Khalid Alshamsi <span>CEO</span></h3>
-                    <h3>Mohamad Saif Bakour <span>Application Developer</span></h3>
-                    <h3>Zayed Jumaa Alleem <span>Digital Model Developer</span></h3>
-                    <h3>Salem Shehab Alqasimi <span>Physical Model Developer</span></h3>
-                    <h3>Mohamad Khalil Musharbek <span>Physical Model Developer</span></h3>
-                    <h3>Khalifa Abdulla Alketbi <span>Digital Editor</span></h3>
-                </article>
+            <div class="info-wrapper">
+                <div class="info-div">
+                    <h1>About Cycoin</h1>
+                    <article>
+                        <h2>What is cycoin?</h2>
+                        <p>
+                            Cycoin is an economy subject project done by a group
+                            of Al Wahda Private School senior students of grade
+                            12B1, year 2021/2022. The project should be a result
+                            of integrating multiple subjects with each other,
+                            economy, finance, and technology.
+                        </p>
+                    </article>
+                    <article>
+                        <h2>Project idea</h2>
+                        <p>
+                            The idea is a smart recycling waste container that
+                            encourages people to recycle their wastes by filling
+                            their account with money each time they recycle
+                            something depending on the weight and the number of
+                            items they have recycled.
+                        </p>
+                    </article>
+                    <article>
+                        <h2>More in details</h2>
+                        <p>
+                            The project consists of a waste bin with a scale
+                            attached to it, in addition to a control tablet,
+                            resulting in a smart bin. People are required to
+                            create an account through the Cycoin application
+                            using the tablet on the bin. And each time they want
+                            to recycle an item, they will have to login with the
+                            username and the password of their accounts.
+                            <br /><br />
+                            To encourage people more, a leaderboard in included
+                            in the application, so the more people recycle, the
+                            higher they will be placed on the leaderboard list,
+                            creating some kind of competition where people will
+                            have to recycle so that they can win and be the top.
+                        </p>
+                    </article>
+                </div>
+                <div class="info-div">
+                    <h1>Cycoin Team</h1>
+                    <article>
+                        <h3>Khalifa Khalid Alshamsi <span>CEO</span></h3>
+                        <h3>
+                            Mohamad Saif Bakour
+                            <span>Application Developer</span>
+                        </h3>
+                        <h3>
+                            Zayed Jumaa Alleem
+                            <span>Digital Model Developer</span>
+                        </h3>
+                        <h3>
+                            Salem Shehab Alqasimi
+                            <span>Physical Model Developer</span>
+                        </h3>
+                        <h3>
+                            Mohamad Khalil Musharbek
+                            <span>Physical Model Developer</span>
+                        </h3>
+                        <h3>
+                            Khalifa Abdullah Alketbi
+                            <span>Digital Editor</span>
+                        </h3>
+                    </article>
+                </div>
             </div>
         </section>
         <!-- My Items Section -->
@@ -183,66 +306,90 @@
             <h1 class="section-title">My Items</h1>
             <div class="table-container">
                 <div class="table">
-                    <% let items = user.userItems.reverse(); %>
-                    <% let itemsLength = items.length >= 100 ? 100 : items.length; %>
+                    <% let items = user.userItems.reverse(); %> <% let
+                    itemsLength = items.length >= 100 ? 100 : items.length; %>
                     <% for (let i = 0; i < itemsLength; i++) { %>
                     <div class="table-element">
-                        <div class="item-number">
-                            <%= (i + 1) %>
-                        </div>
-                        <div class="item-weight number-formatter" data-number="<%= items[i].itemWeight %>" data-format="weight">
+                        <div class="item-number"><%= (i + 1) %></div>
+                        <div
+                            class="item-weight number-formatter"
+                            data-number="<%= items[i].itemWeight %>"
+                            data-format="weight"
+                        >
                             <!-- INSERTED -->
                         </div>
-                        <div class="item-date number-formatter" data-number="<%= items[i].dateInserted %>" data-format="date">
+                        <div
+                            class="item-date number-formatter"
+                            data-number="<%= items[i].dateInserted %>"
+                            data-format="date"
+                        >
                             <!-- INSERTED -->
                         </div>
                     </div>
-                    <% } %>
-                    <% if (items.length > 100) { %>
-                        <p class="items-left">
-                            <% let itemsLeft = items.length - 100; %>
-                            <% if (itemsLeft > 1) { %>
-                                <%= itemsLeft %> more items
-                            <% } else { %>
-                                <%= itemsLeft %> more item
-                            <% } %>
-                        </p>
+                    <% } %> <% if (items.length > 100) { %>
+                    <p class="items-left">
+                        <% let itemsLeft = items.length - 100; %> <% if
+                        (itemsLeft > 1) { %> <%= itemsLeft %> more items <% }
+                        else { %> <%= itemsLeft %> more item <% } %>
+                    </p>
                     <% } %>
                 </div>
             </div>
             <div class="table-border">
                 <% if (itemsLength < 1) { %>
-                    <p class="no-items-msg">No items to display</p>
+                <p class="no-items-msg">No items to display</p>
                 <% } %>
             </div>
         </section>
         <!-- Edit Username/Password Popups -->
         <div class="edit-username popup">
             <h1>Edit Username</h1>
-            <input type="text" placeholder="New Username">
-            <input type="password" placeholder="Enter Password">
-            <button id="editUsernameBtn" onclick="editAccount(this.id, 'username')">Change Username <i class="fas fa-edit"></i></button>
+            <input type="text" placeholder="New Username" />
+            <input type="password" placeholder="Enter Password" />
+            <button
+                id="editUsernameBtn"
+                onclick="editAccount(this.id, 'username')"
+            >
+                Change Username <i class="fas fa-edit"></i>
+            </button>
             <p class="edit-error-field"></p>
         </div>
         <div class="edit-password popup">
             <h1>Edit Password</h1>
-            <input type="password" placeholder="Original Password">
-            <input type="password" placeholder="New Password">
-            <input type="password" placeholder="Confirm Password">
-            <button id="editPasswordBtn" onclick="editAccount(this.id, 'password')">Change Password <i class="fas fa-edit"></i></button>
+            <input type="password" placeholder="Original Password" />
+            <input type="password" placeholder="New Password" />
+            <input type="password" placeholder="Confirm Password" />
+            <button
+                id="editPasswordBtn"
+                onclick="editAccount(this.id, 'password')"
+            >
+                Change Password <i class="fas fa-edit"></i>
+            </button>
             <p class="edit-error-field"></p>
         </div>
         <div class="edit-delete popup">
             <h1 class="dangerous-text">Delete Account</h1>
-            <input type="text" placeholder="Enter Username">
-            <input type="password" placeholder="Enter Password">
-            <button id="editDeleteBtn" onclick="editAccount(this.id, 'delete')" class="dangerous-button">Delete Account</button>
+            <input type="text" placeholder="Enter Username" />
+            <input type="password" placeholder="Enter Password" />
+            <button
+                id="editDeleteBtn"
+                onclick="editAccount(this.id, 'delete')"
+                class="dangerous-button"
+            >
+                Delete Account
+            </button>
             <p class="edit-error-field"></p>
         </div>
         <!-- Add Item Popup -->
         <div class="edit-items popup">
-            <input type="number" placeholder="Item Weight (grams)" class="item-weight-input">
-            <button onclick="addItem(this.previousElementSibling)">Add Item <i class="fas fa-plus"></i></button>
+            <input
+                type="number"
+                placeholder="Item Weight (grams)"
+                class="item-weight-input"
+            />
+            <button onclick="addItem(this.previousElementSibling)">
+                Add Item <i class="fas fa-plus"></i>
+            </button>
             <p class="edit-error-field"></p>
         </div>
         <!-- Darken Mode -->

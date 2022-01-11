@@ -18,22 +18,34 @@ const adminCommands = async (req, res, checkUser, COMMAND_PASS) => {
             case "delete-user":
                 await User.findOneAndDelete({ userName: username });
                 success = true;
-            break;
+                break;
             case "verify-user":
-                await User.findOneAndUpdate({ userName: username }, { userVerified: true });
+                await User.findOneAndUpdate(
+                    { userName: username },
+                    { userVerified: true }
+                );
                 success = true;
-            break;
+                break;
             case "unverify-user":
-                await User.findOneAndUpdate({ userName: username }, { userVerified: false });
+                await User.findOneAndUpdate(
+                    { userName: username },
+                    { userVerified: false }
+                );
                 success = true;
-            break;
+                break;
             case "clear-user":
-                await User.findOneAndUpdate({ userName: username }, { userItems: [], userCoins: 0 });
+                await User.findOneAndUpdate(
+                    { userName: username },
+                    { userItems: [], userCoins: 0 }
+                );
                 success = true;
-            break;
+                break;
             case "get-user":
                 const gotUser = await User.findOne({ userName: username });
-                const { userBalance } = await generators.generateCycoin(gotUser.userItems, gotUser._id);
+                const { userBalance } = await generators.generateCycoin(
+                    gotUser.userItems,
+                    gotUser._id
+                );
                 returns = {
                     Username: gotUser.userName,
                     Gender: gotUser.userGender,
@@ -41,57 +53,68 @@ const adminCommands = async (req, res, checkUser, COMMAND_PASS) => {
                     Items: gotUser.userItems.length,
                     Coins: gotUser.userCoins,
                     Balance: userBalance,
-                    Created: gotUser.createdAt
+                    Created: gotUser.createdAt,
                 };
                 success = true;
-            break;
+                break;
             case "get-changers":
-                const data = fs.readFileSync("internalDatabase/changers.txt", { encoding: "utf-8" });
+                const data = fs.readFileSync("internalDatabase/changers.txt", {
+                    encoding: "utf-8",
+                });
                 if (data) {
                     let arrangedData = data.split(" splitter ");
                     returns = {
                         Rand: arrangedData[0],
-                        User_Rate: arrangedData[1]
+                        User_Rate: arrangedData[1],
                     };
                     success = true;
                 }
-            break;
+                break;
             case "generate-changers":
                 await generators.generateChangers();
                 success = true;
-            break;
+                break;
             case "generate-ranking":
                 await generators.generateRanking();
                 success = true;
-            break;
+                break;
             case "generate":
                 await generators.generateChangers();
                 await generators.generateRanking();
                 success = true;
-            break;
+                break;
             case "test":
                 success = true;
-            break;
+                break;
             case "info":
                 success = true;
                 returns = {
-                    "delete-user": "deletes a user, takes parameters (command-name, username, admin-password)",
-                    "verify-user": "verifies a user, takes parameters (command-name, username, admin-password)",
-                    "unverify-user": "unverifies a user, takes parameters (command-name, username, admin-password)",
-                    "clear-user": "clears user items, coins, and balance, takes parameters (command-name, username, admin-password)",
-                    "get-user": "gets user information, such as username, gender, coins, etc.., takes parameters (command-name, username, admin-password)",
-                    "get-changers": "gets application balance generating algorithm current changers, takes parameters (command-name, admin-password)",
-                    "generate-changers": "immediately generates new application balance algorithm changers, takes parameters (command-name, admin-password)",
-                    "generate-ranking": "immediately generates and updates the new user ranking, takes parameters (command-name, admin-password)",
-                    "generate": "does both generate-changers and generate-ranking at once, takes parameters (command-name, admin-password)",
-                    "test": "test command meant for testing admin commands, does not do any task, takes parameters (command-name, admin-password)",
-                    "info": "admin info center, provides reference to all admin commands, takes parameters (command-name, admin-password)"
+                    "delete-user":
+                        "deletes a user, takes parameters (command-name, username, admin-password)",
+                    "verify-user":
+                        "verifies a user, takes parameters (command-name, username, admin-password)",
+                    "unverify-user":
+                        "unverifies a user, takes parameters (command-name, username, admin-password)",
+                    "clear-user":
+                        "clears user items, coins, and balance, takes parameters (command-name, username, admin-password)",
+                    "get-user":
+                        "gets user information, such as username, gender, coins, etc.., takes parameters (command-name, username, admin-password)",
+                    "get-changers":
+                        "gets application balance generating algorithm current changers, takes parameters (command-name, admin-password)",
+                    "generate-changers":
+                        "immediately generates new application balance algorithm changers, takes parameters (command-name, admin-password)",
+                    "generate-ranking":
+                        "immediately generates and updates the new user ranking, takes parameters (command-name, admin-password)",
+                    generate:
+                        "does both generate-changers and generate-ranking at once, takes parameters (command-name, admin-password)",
+                    test: "test command meant for testing admin commands, does not do any task, takes parameters (command-name, admin-password)",
+                    info: "admin info center, provides reference to all admin commands, takes parameters (command-name, admin-password)",
                 };
-            break;
+                break;
         }
     }
     res.json({ success, returns });
-}
+};
 
 // Export Admin Commands Function
 module.exports = adminCommands;

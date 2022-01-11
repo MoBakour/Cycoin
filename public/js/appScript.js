@@ -4,12 +4,24 @@ const nav_ul = document.querySelector(".app-header nav ul");
 const backBtn = document.querySelector(".back-btn");
 const dashboardSection = document.querySelector(".dashboard");
 const leaderboardSection = document.querySelector(".leaderboard");
+// set overflow after intro animation
+setTimeout(() => {
+    dashboardSection.style.overflow = "hidden";
+}, 1000);
 // open section functions
 function openSection(sec) {
     let sectionSelector = document.querySelector(`.${sec}`);
-    if (!sectionSelector) return console.error(`Client Side Error: DOM section element .${sec} not found`);
-    document.querySelector(".section-opened").classList.remove("section-opened");
+    if (!sectionSelector)
+        return console.error(
+            `Client Side Error: DOM section element .${sec} not found`
+        );
+    let currentOpened = document.querySelector(".section-opened");
+    currentOpened.classList.remove("section-opened");
     sectionSelector.classList.add("section-opened");
+    sectionSelector.style.height = "auto";
+    setTimeout(() => {
+        currentOpened.style.height = "0";
+    }, 300);
     if (sec == "dashboard") {
         nav_ul.style.display = "block";
         backBtn.style.display = "none";
@@ -21,25 +33,34 @@ function openSection(sec) {
 
 /* Transition Between Settings Divs */
 // open section function
-function openSettings(self, div) {
+function openSettings(div) {
     let divSelector = document.querySelector(`.${div}-settings`);
-    if (!divSelector) return console.error(`Client Side Error" DOM div element .${div}-settings not found`);
-    document.querySelector(".settings-opened").classList.remove("settings-opened");
+    if (!divSelector)
+        return console.error(
+            `Client Side Error" DOM div element .${div}-settings not found`
+        );
+    document
+        .querySelector(".settings-opened")
+        .classList.remove("settings-opened");
     divSelector.classList.add("settings-opened");
-    document.querySelector(".settings-option.current-option").classList.remove("current-option");
-    self.classList.add("current-option");
+    document
+        .querySelectorAll(".settings .current-option")
+        .forEach((el) => el.classList.remove("current-option"));
+    document
+        .querySelectorAll(`[data-btn-name='${div}']`)
+        .forEach((el) => el.classList.add("current-option"));
 }
 
 /* Logout Script */
 function logout() {
     fetch("/logout", {
-        method: "POST"
+        method: "POST",
     })
-    .then(res => res.json())
-    .then(data => {
-        if (data.success) location.href = "/";
-    })
-    .catch(err => console.log(err));
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.success) location.href = "/";
+        })
+        .catch((err) => console.log(err));
 }
 
 /* Open Edit Divs */
@@ -64,9 +85,9 @@ darken.addEventListener("click", () => {
 
 // Clear Edit Error Fields
 function clearEditPopups() {
-    allEditFields.forEach(field => field.value = "");
-    allEditErrorFields.forEach(field => {
-        field.innerText = ""
+    allEditFields.forEach((field) => (field.value = ""));
+    allEditErrorFields.forEach((field) => {
+        field.innerText = "";
         field.style.color = "var(--error-color)";
         field.style.display = "none";
     });
@@ -83,27 +104,33 @@ function successEditMessage() {
 /* Send Edit User Account Request */
 function editAccount(selfId, edit) {
     let self = document.querySelector(`#${selfId}`);
-    let username = password = confirmPassword = newPassword = null;
-    let refreshPage = activateDarken = false;
+    let username = (password = confirmPassword = newPassword = null);
+    let refreshPage = (activateDarken = false);
     switch (edit) {
         case "username":
             username = self.parentElement.children[1].value;
             password = self.parentElement.children[2].value;
-            editError = document.querySelector(".edit-username .edit-error-field");
+            editError = document.querySelector(
+                ".edit-username .edit-error-field"
+            );
             refreshPage = true;
-        break;
+            break;
         case "password":
             password = self.parentElement.children[1].value;
             newPassword = self.parentElement.children[2].value;
             confirmPassword = self.parentElement.children[3].value;
-            editError = document.querySelector(".edit-password .edit-error-field");
+            editError = document.querySelector(
+                ".edit-password .edit-error-field"
+            );
             activateDarken = true;
-        break;
+            break;
         case "delete":
             username = self.parentElement.children[1].value;
             password = self.parentElement.children[2].value;
-            editError = document.querySelector(".edit-delete .edit-error-field");
-        break;
+            editError = document.querySelector(
+                ".edit-delete .edit-error-field"
+            );
+            break;
     }
     fetch("/edit", {
         method: "POST",
@@ -112,80 +139,95 @@ function editAccount(selfId, edit) {
             username,
             password,
             newPassword,
-            confirmPassword
+            confirmPassword,
         }),
-        headers: { "Content-Type": "application/json" }
+        headers: { "Content-Type": "application/json" },
     })
-    .then(res => res.json())
-    .then(data => {
-        if (!data.success) {
-            editError.style.display = "block";
-            return editError.innerText = data.editError;
-        } else {
-            if (edit == "delete") {
-                openAlert("Are you sure you want to delete your account?", deleteAccount);
+        .then((res) => res.json())
+        .then((data) => {
+            if (!data.success) {
+                editError.style.display = "block";
+                return (editError.innerText = data.editError);
             } else {
-                successEditMessage();
+                if (edit == "delete") {
+                    openAlert(
+                        "Are you sure you want to delete your account?",
+                        deleteAccount
+                    );
+                } else {
+                    successEditMessage();
+                }
+                setTimeout(() => {
+                    if (refreshPage) location.reload();
+                    if (activateDarken) darken.click();
+                }, 800);
             }
-            setTimeout(() => {
-                if (refreshPage) location.reload();
-                if (activateDarken) darken.click();
-            }, 800);
-        }
-    })
-    .catch(err => console.log(err));
+        })
+        .catch((err) => console.log(err));
 }
 
 /* Send Delete Account Request */
 function deleteAccount() {
     fetch("/deleteaccount", {
         method: "POST",
-        headers: { "Content-Type": "application/json" }
+        headers: { "Content-Type": "application/json" },
     })
-    .then(res => res.json())
-    .then(data => {
-        if (data.success) {
-            successEditMessage();
-            setTimeout(() => {
-                logout();
-            }, 800);
-        }
-    });
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.success) {
+                successEditMessage();
+                setTimeout(() => {
+                    logout();
+                }, 800);
+            }
+        });
 }
 
 /* Send Add Item Request */
 const userCoinsField = document.querySelector(".stat-coins .stat-content");
-const userBalanceField = document.querySelector(".user-balance .balance-content span");
+const userBalanceField = document.querySelector(
+    ".user-balance .balance-content span"
+);
 function addItem(prevEl) {
     let weight = prevEl.value;
     fetch("/additem", {
         method: "POST",
         body: JSON.stringify({ weight }),
-        headers: { "Content-Type": "application/json" }
+        headers: { "Content-Type": "application/json" },
     })
-    .then(res => res.json())
-    .then(data => {
-        let editError = document.querySelector(".edit-items .edit-error-field");
-        if (!data.success) {
-            editError.style.display = "block";
-            editError.style.color = "var(--error-color)";
-            editError.innerText = data.editError;
-        } else {
-            editError.style.display = "block";
-            editError.style.color = "lime";
-            editError.innerText = "All good! item added";
-            setTimeout(clearEditPopups, 1000);
-            insertItem(weight, data.dateInserted);
-            userCoinsField.innerText = numberFormatter(data.userCoins, userCoinsField.getAttribute("data-format"));
-            userBalanceField.innerText = numberFormatter(data.userBalance, userBalanceField.getAttribute("data-format"));
-        }
-    })
-    .catch(err => console.log(err));
+        .then((res) => res.json())
+        .then((data) => {
+            let editError = document.querySelector(
+                ".edit-items .edit-error-field"
+            );
+            if (!data.success) {
+                editError.style.display = "block";
+                editError.style.color = "var(--error-color)";
+                editError.innerText = data.editError;
+            } else {
+                editError.style.display = "block";
+                editError.style.color = "lime";
+                editError.innerText = "All good! item added";
+                setTimeout(clearEditPopups, 1000);
+                insertItem(weight, data.dateInserted);
+                userCoinsField.innerText = numberFormatter(
+                    data.userCoins,
+                    userCoinsField.getAttribute("data-format")
+                );
+                userBalanceField.innerText = numberFormatter(
+                    data.userBalance,
+                    userBalanceField.getAttribute("data-format")
+                );
+            }
+        })
+        .catch((err) => console.log(err));
 }
 
 /* Insert New Items */
 const itemsTable = document.querySelector(".my-items .table");
-const itemsNumber = document.querySelector(".user-statistics .stat-items .stat-content");
+const itemsNumber = document.querySelector(
+    ".user-statistics .stat-items .stat-content"
+);
 const noItemMsg = document.querySelector(".no-items-msg");
 function insertItem(weight, dateInserted) {
     if (noItemMsg) noItemMsg.remove();
@@ -196,7 +238,9 @@ function insertItem(weight, dateInserted) {
         if (!nth) continue;
         nth.innerText = parseInt(nth.innerText) + 1;
     }
-    itemsTable.insertAdjacentHTML("afterbegin", `
+    itemsTable.insertAdjacentHTML(
+        "afterbegin",
+        `
         <div class="table-element special-element">
             <div class="item-number">
                 1
@@ -208,5 +252,6 @@ function insertItem(weight, dateInserted) {
                 ${numberFormatter(dateInserted, "date")}
             </div>
         </div>
-    `);
+    `
+    );
 }

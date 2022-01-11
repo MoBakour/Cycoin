@@ -1,18 +1,37 @@
 const projct_info = {
     project_name: "Cycoin",
-    project_description: "Web application for technological recycling waste container",
-    project_version: "V_DEV",
+    project_description:
+        "Web application for technological recycling waste container",
+    project_version: "V1.0.0",
     project_contributers: [
         "Khalifa Khalid Alshamsi (Khxloof) - Cycoin CEO",
         "Mohamad Saif Bakour (Swordax) - Web Application Developer",
         "Zayed Jumaa Alali (Zackie) - Digital Model Developer",
         "Salem Shehab Alqasimi (Wizper) - Physical Model Developer",
-        "Mohamad Khalil Musharbek (Argent) - Physical Model Developer"
+        "Mohamad Khalil Musharbek (Argent) - Physical Model Developer",
+        "Khalifa Abdullah Alketbi (Scout) - Digital Editor",
     ],
-    project_technologies: ["HTML", "CSS", "JavaScript", "NodeJS", "Express.js", "EJS", "JWT", "Heroku Hosting", "Font Awesome", "Google Fonts"],
-    development_duration: "61:30:00 (yet)",
+    project_technologies: [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Node.js",
+        "Express.js",
+        "EJS",
+        "JWT",
+        "Heroku Hosting",
+        "Font Awesome",
+        "Google Fonts",
+        "Prettier Formatter",
+    ],
+    /*
+        I wish I used SASS but I wasn't familiar with it when I started 
+        working on the project, and now the CSS is already written so uh..
+        why rewrite?
+    */
+    development_duration: "68:00:00",
     development_start: "22 Oct, 2021",
-    development_end: null
+    development_end: "11 Jan, 2022",
 };
 
 const project_updates = {
@@ -40,7 +59,7 @@ const project_updates = {
         "Created the user.js file in the models folder and wrote the user schema",
         "Wrote the hashing function using bcrypt in the user.js file",
         "Created middlewares folder and in it created the signupValidation.js file",
-        "Wrote the signup form validation code"
+        "Wrote the signup form validation code",
     ],
     "23 Oct, 2021": [
         "Worked on the signup form validation system",
@@ -48,12 +67,12 @@ const project_updates = {
         "Fixed an error in the database connection string",
         "Wrote the back-end code for the user signup and successfully completed the system",
         "Worked on filtering the errors in the code and displaying them to the user",
-        "Completed the signup process, its validation, and the client-side validation errors processing and displaying"
+        "Completed the signup process, its validation, and the client-side validation errors processing and displaying",
     ],
     "24 Oct, 2021": [
         "Decreased the padding underthe submit button in the home forms",
         "Added signup success indicator animation when successfully signing up",
-        "Started working on the login process"
+        "Started working on the login process",
     ],
     "25 Oct, 2021": [
         "Fixed a bug when sending the login request from the front-end",
@@ -68,12 +87,12 @@ const project_updates = {
         "Added a form input & error fields clearing mechanism triggered when clicking the back button in home page forms",
         "Added more validation to login errors",
         "Finished the process of creating jwt tokens when users login or signup and the storing them in the cookies",
-        "Completed the user authentication system through the pages of the website"
+        "Completed the user authentication system through the pages of the website",
     ],
     // Computer died for around 2 weeks :/
     "14 Nov, 2021": [
         "Fixed a bug when logging in causing the ejs local variable 'user' not being passed properly",
-        "Worked on the user-interface of the app main page"
+        "Worked on the user-interface of the app main page",
     ],
     "15 Nov, 2021": [
         "Finished working on the left side of the main user-dashboard",
@@ -81,7 +100,7 @@ const project_updates = {
         "Created dashboard right side buttons",
         "Modified the layout of the app main dashboard to be compatable with other devices",
         "Added a browser tab icon",
-        "Added user-dashboard onload animations"
+        "Added user-dashboard onload animations",
     ],
     "16 Nov, 2021": [
         "Finished the basic initial layout and design of the leaderboard table",
@@ -104,7 +123,7 @@ const project_updates = {
         "Added the logout option button in the settings menu",
         "Replaced all the settings menu image icons to font icons from fontawesome",
         "Completed the logout functionality",
-        "Replaced the crown, items, and coin images with icons from fontawesome"
+        "Replaced the crown, items, and coin images with icons from fontawesome",
     ],
     "18 Nov, 2021": [
         "Created the edit user popups (edit username, edit password, delete account) and made it's appearance functional",
@@ -114,7 +133,7 @@ const project_updates = {
         "Linked the public js files to the html (ejs) files",
         "Fixed the bug of not redirecting when signing up",
         "Organized the js files",
-        "Modified the user model items property and added item inserting date"
+        "Modified the user model items property and added item inserting date",
     ],
     "19 Nov, 2021": [
         "Added error fields in the account edit divs",
@@ -124,7 +143,7 @@ const project_updates = {
         "Completed all the account settings functionality",
         "Added password authentication when changing account username",
         "Modified the style of the account settings buttons to be compatible with different situations",
-        "Made the account editing success message cooler"
+        "Made the account editing success message cooler",
     ],
     "20 Nov, 2021": [
         "Added duplicate username validation when changing the username",
@@ -134,7 +153,7 @@ const project_updates = {
         "Created the add-item popup",
         "Modified the user schema to be compatible with the add-item functionality",
         "Completed the add-item front-end and back-end functionality",
-        "Worked on the layout of the edit-popups error to look better"
+        "Worked on the layout of the edit-popups error to look better",
         // Today I hit 24 hours working on this project :O
     ],
     "21 Nov, 2021": [
@@ -142,14 +161,14 @@ const project_updates = {
         "Worked on the my-items section and table",
         "Completed the new template of the table design and layout",
         "Did small modification to the after adding item front-end process",
-        "Worked on applying the new design of the table on the leaderboard table"
+        "Worked on applying the new design of the table on the leaderboard table",
     ],
     "22 Nov, 2021": [
         "Created a new front-end js file 'numberFormatter.js' and kept it inside the js public directory",
         "Wrote code for number/date formatter inside the new js file",
         "Called the numberFormatter.js in the head tag, numberFormatter() function is available in all pages now",
         "Finalized the layout of the 'my-items' table",
-        "Made the my-items table dynamic with formatted numbers and dates, and a limited amount of items to be loaded and inserted"
+        "Made the my-items table dynamic with formatted numbers and dates, and a limited amount of items to be loaded and inserted",
         // Hit 30 hours working on the project :O
     ],
     "23 Nov, 2021": [
@@ -159,7 +178,7 @@ const project_updates = {
         "Fixed a bug in the numberFormatter causing an error when passing a small number less than 1000",
         "Indicated the recently inserted items with a special background color",
         "Developed the number formatting mechanism to make it more reusable and easy to format",
-        "Worked on the algorithm for getting the arranged users depending on their coins, in addition to getting the current user rank"
+        "Worked on the algorithm for getting the arranged users depending on their coins, in addition to getting the current user rank",
     ],
     "24 Nov, 2021": [
         "Developed the numberFormatter(x, number) function code and made it more precise and wide with new features",
@@ -169,10 +188,10 @@ const project_updates = {
         "Created a new back-end middleware js file called generateRanking.js located in the middlewares directory",
         "Added a new field to the user schema, the userRank field, which will contain an integer number representing the rank of the player",
         "Wrote the code for ranking users depending on a given parameter (currently and temporarly using the number of items)",
-        "Made the rank field in the main dashboard dynamic"
+        "Made the rank field in the main dashboard dynamic",
     ],
     "25 Nov, 2021": [
-        "Fixed a bug that caused the first new account show rank as 0, by setting a default rank of the users collection length plus one"
+        "Fixed a bug that caused the first new account show rank as 0, by setting a default rank of the users collection length plus one",
     ],
     "26 Nov, 2021": [
         "Worked on the coins / balance algorithims",
@@ -181,7 +200,7 @@ const project_updates = {
         "Created .txt files that will work as internal database to save various data such as random, requests number, date of recording and more",
         "All data stored inside the .txt files in the internalDatabase directory folder will be used in the algo used in generating coins and balance",
         "Worked on the algorithm for generating coins, balance, and balance value",
-        "Worked on the code for manipulating the .txt files and generating their values, also using their values in generating coins, balances etc.."
+        "Worked on the code for manipulating the .txt files and generating their values, also using their values in generating coins, balances etc..",
     ],
     "27 Nov, 2021": [
         "Worked on the algorithm for generating the coin value, and for generating the user balance",
@@ -201,7 +220,7 @@ const project_updates = {
         "Modified the algorithm and applied a temporary solution (maybe permenant idk) to fix the bugs caused",
         "Changed the ranking algo to rank according to coins and not to number of items",
         "Set the changers to be generated every 24 hours",
-        "Set the ranking to be generated every 5 minutes and not on every get request to '/'"
+        "Set the ranking to be generated every 5 minutes and not on every get request to '/'",
     ],
     "28 Nov, 2021": [
         "Filled a hole in the authentication syste, where if the user was deleted from the database and he tried to refresh the page, he would cause fatal errors",
@@ -210,7 +229,7 @@ const project_updates = {
         "Wrote the ejs template for displaying the leaderboard list in app.ejs",
         "Completed the leaderboard generating and displaying system",
         "Made hovering on the dashboard elements display titles containing the unformatted numbers, providing the precise numbers to the users",
-        "Added the username to the browser tab in case user was logged in"
+        "Added the username to the browser tab in case user was logged in",
     ],
     "29 Nov, 2021": [
         "Completed the front-end design of the leaderboard opening button in the home page home.ejs",
@@ -222,7 +241,7 @@ const project_updates = {
             if another user logs in, the generateLeaderboard() function is going to run, and is still going to look for the deleted user according 
             to his rank (before the generateRanking() function runs to fix this hole in ranks), but mongodb is going to return null, since the user 
             with that rank is deleted, causing an error when executing the ejs code in the app.ejs file
-        `
+        `,
     ],
     "30 Nov, 2021": [
         "Fixed the issue where in the settings menu, the appearnce and the account settings icons were switched",
@@ -233,7 +252,7 @@ const project_updates = {
         "Made the navagation option 'leaderboard' take the user to a separate page 'leaderboard.ejs'",
         "Moved the leaderboard section form the app.ejs to the leaderboard.ejs",
         "Started working on the new leaderboard page styling and functioality",
-        "Added some new colors to the themeController.js themes"
+        "Added some new colors to the themeController.js themes",
     ],
     "1 Dec, 2021": [
         "Fixed an issue where the element title of the user-balance div was appearing through the whole page width",
@@ -245,7 +264,7 @@ const project_updates = {
         "Deleted the script.js file as its useless so far",
         "Now, the leaderboard can be accessed from inside and outside the application",
         // Later that day
-        "Worked on the layout of the website to make it ready for responsivness"
+        "Worked on the layout of the website to make it ready for responsivness",
     ],
     "2 Dec, 2021": [
         "Made some more changes on the settings section layout, as well the leaderboard styling",
@@ -260,7 +279,7 @@ const project_updates = {
         // Later that day
         "Created checkUser() function that checks if the user we are trying to apply changes to exists or not, if not, the edit/addItem function wont complete to avoid fatal errors",
         "Added two new admin_command() commands, get-user command which gets all user information, get-changers command which gets the changers values",
-        "Added table consoling, when the admin_command() returns an object, its displayed in the console as a table"
+        "Added table consoling, when the admin_command() returns an object, its displayed in the console as a table",
     ],
     "3 Dec, 2021": [
         "Removed all the repeated validations in the edit-account code, and used the signupValidation() function to validate most of the editing",
@@ -270,7 +289,7 @@ const project_updates = {
         "Placed the adding-item code inside a try catch block to prevent fatal errors",
         "Added 'No users to display' message in the leaderboard table in case there are no users displayed in the leaderboard",
         "Created adminCommands.js file in the middlewares directory",
-        "Moved the admin commands code from the app.js into the adminCommands.js and set the app route in app.js to run the function in adminCommands.js"
+        "Moved the admin commands code from the app.js into the adminCommands.js and set the app route in app.js to run the function in adminCommands.js",
         // Hit 55 hours C:
     ],
     "4 Dec, 2021": [
@@ -280,34 +299,58 @@ const project_updates = {
         "Created the confirmation alert, completed styling it and making it functional",
         "Applied confirmation alert when logging out",
         "Did some modifications to the editAccount() function mechanism to meet the reuirements of the confirmation alert mechanism",
-        "Did a small change in the client-side console messages text"
+        "Did a small change in the client-side console messages text",
     ],
     "5 Dec, 2021": [
         "Modified the account editing system (delete account) mechanism to be compatible with the confirmation alert implementation",
         "Implemented the confirmation alert on account deleting process",
         "Initially completed the info section and designed it",
-        "Fixed a bug in the signup validation process that caused some errors to not to be displayed for users"
+        "Fixed a bug in the signup validation process that caused some errors to not to be displayed for users",
         // Technically, main application development is completed, responsive design implementation is left
     ],
     "6 Dec, 2021": [
         "Started working on the responsive design of the application",
-        "Completed the responsive design of the home page"
+        "Completed the responsive design of the home page",
     ],
     "7 Dec, 2021": [
         "Completed the responsive design of the leaderboard page",
-        "Did some small changes in the project_info variable content in the info.js file"
-    ]
+        "Did some small changes in the project_info variable content in the info.js file",
+    ],
+    // Holidays :)
+    "28 Dec, 2021": [
+        "Worked on the responsive design of the dashboard section and almost completed it",
+        "Did some modifications that fixed the layout of the main application page (app.ejs)",
+        "Fixed the layout of the info section",
+        "Did some changes in the layout of the settings section",
+    ],
+    "30 Dec, 2021": [
+        "Did some changes in the layout of the app",
+        "Worked on making the app-header responsive",
+        "Made the settings section completely responsive",
+    ],
+    "31 Dec, 2021": [
+        "Fixed the page extra scrolling-height caused by long hidden sections",
+        "Completed the responsive design of the app-header",
+        "Fixed some issues with the overflow of the sections and the dashboard intro animation",
+        // Later that day (it rained xd)
+        // Hit 65 hours into the project development!
+        "Made the info section responsive",
+        "Fixed design scaling issues with the app tables",
+        "Fixed long usernames overflowing issue",
+        "Added a username validation layer for curse words",
+        "Made a change to to apply current-selected option marking on both settings menus for small and large devices at the same time", // 2022 in 4 hours :)
+    ],
+    "10 Jan, 2022": ["Intial test deploy on heroku"],
+    "11 Jan, 2022": [
+        "Used the prettier formatter to format all the project code",
+        "Did some small modifications on the info.js file",
+        "Added 'Khalifa Abdulla' name in the contributers list",
+        "Added the project_versions constant in the info.js file",
+        "V1.0.0 Deploy on Heroku",
+    ],
 };
 
-
-
-
-/* TODO */
-/*
-
-{
-    1- Protect requesting buttons from mass clicking
-    2- Make the application responsive
-}
-
-*/
+const project_versions = {
+    V_DEV: "Development Testing Version",
+    "V1.0.0": "Initial version",
+};

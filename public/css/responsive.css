@@ -7,6 +7,45 @@
     }
 }
 
+@media (max-width: 900px) {
+    .settings-content .left {
+        display: none;
+    }
+    .res-settings-options {
+        display: flex;
+    }
+    .settings .right {
+        width: 100%;
+    }
+    .settings-content {
+        justify-content: center;
+        padding-top: 20px;
+        height: unset;
+    }
+}
+
+@media (max-width: 800px) {
+    .dashboard {
+        flex-direction: column;
+    }
+    .dashboard-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .user-balance {
+        text-align: center;
+    }
+    .balance-content {
+        margin-left: 0;
+    }
+    .user-info .user-name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 360px;
+    }
+}
+
 @media (max-width: 700px) {
     .element-number {
         font-size: 22px;
@@ -23,9 +62,35 @@
     }
 }
 
+@media (max-width: 560px) {
+    .account-settings,
+    .account-settings > div {
+        width: 100%;
+    }
+    .info h1 {
+        font-size: 34px;
+    }
+    .info h2 {
+        font-size: 24px;
+    }
+    .info p {
+        font-size: 16px;
+    }
+    .info article,
+    .info p {
+        padding-left: 15px;
+    }
+    .user-info {
+        transform: scale(0.8);
+    }
+    .user-info .user-name {
+        max-width: 300px;
+    }
+}
+
 @media (max-width: 500px) {
     .home-section .text-part {
-        transform: scale(.7);
+        transform: scale(0.7);
     }
     .home-section .btns-part {
         display: flex;
@@ -38,7 +103,9 @@
     .form-format {
         width: 260px;
     }
-    .form-format .form-content input:not(.form-format .form-content input[type="radio"]),
+    .form-format
+        .form-content
+        input:not(.form-format .form-content input[type="radio"]),
     .password-input {
         width: 100%;
     }
@@ -66,5 +133,46 @@
     .table-element img {
         width: 24px;
         margin-right: 6px;
+    }
+    .app-header nav li {
+        font-size: 18px;
+        margin-right: 20px;
+    }
+    .section-title {
+        flex-direction: column;
+    }
+    .res-settings-options {
+        margin-top: 12px;
+    }
+    .settings .right > div {
+        transform: scale(0.8);
+    }
+    .account-settings > div {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    .account-settings > div > div {
+        float: unset;
+        clear: both;
+        width: 100%;
+    }
+    .delete-account-btn {
+        width: 90%;
+    }
+}
+
+@media (max-width: 400px) {
+    .user-info {
+        transform: scale(0.6);
+    }
+}
+
+@media (max-width: 380px) {
+    .app-header nav li {
+        display: block;
+    }
+    section:not(.home-sections) {
+        width: 100%;
     }
 }

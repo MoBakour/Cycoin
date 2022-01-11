@@ -1,8 +1,8 @@
 /* Transitions Root */
 :root {
-    --transition: all .3s ease;
-    --bg-transition: background .3s ease;
-    --opacity-transition: opacity .3s ease;
+    --transition: all 0.3s ease;
+    --bg-transition: background 0.3s ease;
+    --opacity-transition: opacity 0.3s ease;
 }
 
 /* General */
@@ -18,16 +18,26 @@ body {
     overflow-x: hidden;
     transition: var(--bg-transition);
 }
+html,
+body {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
 section:not(.home-sections) {
-    height: calc(100vh - 100px);
+    display: flex;
     width: 90%;
+    max-width: 1000px;
     color: var(--color-one);
+    margin-top: 30px;
+    padding-bottom: 20px;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     transition: var(--opacity-transition);
     opacity: 0;
     z-index: -1;
+    height: 0;
+    overflow: hidden;
 }
 .section-opened {
     z-index: 1 !important;
@@ -35,6 +45,9 @@ section:not(.home-sections) {
 }
 .section-title {
     font-size: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .preload {
     transition: none !important;
@@ -46,7 +59,8 @@ section:not(.home-sections) {
     background-color: var(--error-color) !important;
     color: var(--white) !important;
 }
-a, a:active {
+a,
+a:active {
     text-decoration: none;
 }
 
@@ -61,10 +75,10 @@ a, a:active {
 
 /* Icons */
 .fas.fa-crown {
-    color: goldenrod
+    color: goldenrod;
 }
 .fas.fa-donate {
-    color: gold
+    color: gold;
 }
 .fas.fa-recycle {
     color: var(--color-one);
@@ -111,7 +125,7 @@ a, a:active {
     user-select: none;
 }
 .back-btn:hover {
-    opacity: .7;
+    opacity: 0.7;
 }
 .home-back-btn {
     position: absolute;
@@ -190,7 +204,7 @@ a, a:active {
     transition: var(--opacity-transition);
 }
 .ldrbrd-btn:hover {
-    opacity: .7;
+    opacity: 0.7;
 }
 
 /* Home Forms */
@@ -218,7 +232,9 @@ a, a:active {
     flex-direction: column;
     align-items: center;
 }
-.form-format .form-content input:not(.form-format .form-content input[type="radio"]) {
+.form-format
+    .form-content
+    input:not(.form-format .form-content input[type="radio"]) {
     width: 90%;
     font-size: 20px;
     padding: 3px 0;
@@ -253,7 +269,8 @@ a, a:active {
     align-self: center;
     font-weight: bold;
 }
-.gender-form input:hover, .gender-form label:hover {
+.gender-form input:hover,
+.gender-form label:hover {
     cursor: pointer;
 }
 .password-input {
@@ -300,25 +317,27 @@ a, a:active {
     height: 60px;
     margin-left: 20px;
 }
-.app-header nav { transition: var(--transition); }
+.app-header nav {
+    transition: var(--transition);
+}
 .app-header nav li {
     list-style: none;
     color: var(--color-one);
     display: inline-block;
     font-size: 24px;
-    opacity: .8;
+    opacity: 0.8;
     margin-right: 40px;
     cursor: pointer;
     transition: var(--transition);
     user-select: none;
+    text-align: center;
 }
 .app-header nav li:hover {
-    opacity: .5;
+    opacity: 0.5;
 }
 
 /* User Dashboard / App.ejs */
 .dashboard {
-    display: flex;
     align-items: center;
 }
 .dashboard .left {
@@ -334,7 +353,7 @@ a, a:active {
 .dashboard > div,
 .stat-element div {
     width: 50%;
-    height: 100%;
+    /* height: 100%; */
 }
 @keyframes animateDashboard {
     to {
@@ -343,11 +362,6 @@ a, a:active {
     }
 }
 /* Dashboard - Left Side */
-.dashboard-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
 .user-info {
     display: flex;
     align-items: center;
@@ -392,8 +406,12 @@ a, a:active {
     text-align: center;
 }
 .stat-rank .stat-content,
-.stat-items .stat-content {color: var(--green)}
-.stat-coins .stat-content {color: var(--blue)}
+.stat-items .stat-content {
+    color: var(--green);
+}
+.stat-coins .stat-content {
+    color: var(--blue);
+}
 .user-balance {
     font-weight: bold;
     font-size: 22px;
@@ -431,7 +449,7 @@ a, a:active {
     transition: var(--transition);
 }
 .dashboard-btns button:hover {
-    opacity: .8;
+    opacity: 0.7;
 }
 .dashboard-btns i {
     margin-right: 20px;
@@ -444,6 +462,9 @@ a, a:active {
 }
 
 /* Settings */
+.settings {
+    flex-direction: column;
+}
 .settings-content {
     width: 100%;
     height: 400px;
@@ -457,7 +478,6 @@ a, a:active {
     height: 100%;
     min-height: calc(200px - 20px);
     max-height: calc(400px - 20px);
-    margin-bottom: 20px;
     background-color: var(--green-two);
     border-radius: 10px;
     transition: var(--bg-transition);
@@ -475,8 +495,8 @@ a, a:active {
     color: var(--color-one);
     transition: var(--transition);
 }
-.settings .settings-option:hover {
-    background-color: rgba(255,255,255,0.2);
+.settings .settings-option:hover:not(.current-option) {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 .settings .settings-option i {
     font-size: 30px;
@@ -488,8 +508,8 @@ a, a:active {
     font-size: 24px;
     font-weight: bold;
 }
-.settings .settings-option.current-option {
-    background-color: rgba(255,255,255,0.4);
+.settings .current-option {
+    background-color: rgba(255, 255, 255, 0.4);
 }
 .settings .right {
     width: calc(100% - 300px);
@@ -500,6 +520,24 @@ a, a:active {
 .settings .right > div:not(.settings-opened) {
     opacity: 0;
     display: none;
+}
+.res-settings-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--green-two);
+    border-radius: 12px;
+    overflow: hidden;
+    display: none;
+}
+.res-settings-option {
+    color: var(--color-one);
+    border: none;
+    outline: none;
+    padding: 10px 24px;
+    font-size: 20px;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 /* Appearance Settings */
@@ -553,7 +591,7 @@ a, a:active {
     transition: var(--transition);
 }
 .account-settings button:hover {
-    opacity: .8;
+    opacity: 0.8;
 }
 .account-settings > div {
     width: 500px;
@@ -648,7 +686,7 @@ a, a:active {
     transition: var(--transition);
 }
 .popup button:hover {
-    opacity: .8;
+    opacity: 0.8;
 }
 .edit-error-field {
     text-align: center;
@@ -661,13 +699,17 @@ a, a:active {
 /* Info Section */
 .info {
     margin-top: 30px;
-    height: calc(100vh - 130px) !important;
+}
+.info-wrapper {
+    height: calc(100vh - 170px) !important;
     overflow-y: auto;
 }
 .info-div {
     padding: 20px;
-    background-color: rgba(255,255,255,.2);
+    background-color: rgba(255, 255, 255, 0.2);
     border-radius: 16px;
+}
+.info-div:not(.info-div:last-child) {
     margin-bottom: 50px;
 }
 .info h1 {
@@ -738,11 +780,12 @@ a, a:active {
     transition: var(--opacity-transition);
 }
 .conf-alert .btns button:hover {
-    opacity: .8;
+    opacity: 0.8;
 }
 
 /* Darken Mode */
-.darken, .conf-darken {
+.darken,
+.conf-darken {
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -754,7 +797,7 @@ a, a:active {
     z-index: -1;
 }
 .darken-active {
-    opacity: .7;
+    opacity: 0.7;
     z-index: 2;
 }
 .conf-darken.darken-active {
@@ -777,10 +820,11 @@ a, a:active {
     margin-right: 20px;
 }
 .table-border {
-    width: calc(100% - 20px);
-    max-width: calc(900px - 20px);
+    width: calc(100% - 26px);
+    max-width: calc(900px - 26px);
     height: 400px;
     border: 3px solid var(--color-one);
+    /* box-sizing: border-box; */
     position: absolute;
     top: 83px;
     left: calc(50% - 10px);
@@ -815,7 +859,9 @@ a, a:active {
     background-color: var(--special-element) !important;
     color: var(--black) !important;
 }
-.table .special-element .fas.fa-recycle {color: var(--black) !important;}
+.table .special-element .fas.fa-recycle {
+    color: var(--black) !important;
+}
 
 /* Leaderboard Table */
 .leaderboard {
@@ -853,6 +899,9 @@ a, a:active {
 }
 
 /* Items Table */
+.my-items {
+    flex-direction: column;
+}
 .my-items .table-element > div {
     justify-content: center;
 }
@@ -872,7 +921,7 @@ a, a:active {
     padding: 15px 0 5px 0;
 }
 .no-items-msg {
-    color: rgba(255,255,255,0.6);
+    color: rgba(255, 255, 255, 0.6);
     font-size: 30px;
     text-align: center;
     position: absolute;
