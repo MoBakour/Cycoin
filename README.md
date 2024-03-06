@@ -4,6 +4,8 @@
 
 **_V1.0.0_**
 
+test
+
 ## About
 
 Cycoin is an environmental project that aims to increase people's awareness of the importance of recycling in our societies. Cycoin consists of multiple components, the physical mode, the digital model, and the technological component.
