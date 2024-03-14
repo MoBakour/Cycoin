@@ -23,7 +23,9 @@
                 <ul>
                     <a href="/leaderboard"><li>leaderboard</li></a>
                     <li onclick="openSection('settings');">settings</li>
-                    <li onclick="openSection('info');">info</li>
+                    <li onclick="openSection('info');" style="display: none">
+                        info
+                    </li>
                 </ul>
                 <div
                     class="back-btn app-back-btn"
@@ -230,7 +232,7 @@
             </div>
         </section>
         <!-- Info Section -->
-        <section class="info">
+        <section class="info" style="display: none">
             <div class="info-wrapper">
                 <div class="info-div">
                     <h1>About Cycoin</h1>

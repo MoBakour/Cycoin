@@ -348,9 +348,14 @@ const project_updates = {
         "Added the project_versions constant in the info.js file",
         "V1.0.0 Deploy on Heroku",
     ],
+    "14 March, 2024": [
+        "Refactored some of the backend code",
+        "V1.1.0 Deploy on Render.com",
+    ],
 };
 
 const project_versions = {
     V_DEV: "Development Testing Version",
     "V1.0.0": "Initial version",
+    "V1.1.0": "Refactored backend code",
 };
