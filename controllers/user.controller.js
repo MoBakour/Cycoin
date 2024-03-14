@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 const User = require("../models/user.js");
-const { checkUser, createToken } = require("../middlewares/auth.js");
+const { createToken } = require("../middlewares/auth.js");
 const signupValidation = require("../middlewares/signupValidation.js");
 
 router.post("/login", async (req, res) => {
@@ -88,7 +88,7 @@ router.post("/logout", (req, res) => {
 
 router.post("/edit", async (req, res) => {
     let { edit, username, password, newPassword, confirmPassword } = req.body;
-    let userExists = await checkUser(req.user?._id);
+    let userExists = await User.exists({ _id: req.user?._id });
     if (!userExists)
         return res.status(400).json({
             success: false,

@@ -359,3 +359,11 @@ const project_versions = {
     "V1.0.0": "Initial version",
     "V1.1.0": "Refactored backend code",
 };
+
+/**
+ * hides:
+ *      meta author
+ *      info section
+ *      info section link
+ *      script.js logs
+ */

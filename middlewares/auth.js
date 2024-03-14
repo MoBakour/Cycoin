@@ -34,19 +34,6 @@ function checkAuth(req, res, next) {
     }
 }
 
-// Check If User Exists
-async function checkUser(cred) {
-    try {
-        const exists = await User.exists({
-            $or: [{ _id: cred }, { userName: cred }],
-        });
-
-        return exists;
-    } catch (err) {
-        throw Error("Something went wrong");
-    }
-}
-
 // Create JWT Token
 function createToken(userId) {
     return new Promise((resolve, reject) => {
@@ -64,4 +51,4 @@ function createToken(userId) {
     });
 }
 
-module.exports = { authenticate, checkAuth, checkUser, createToken };
+module.exports = { authenticate, checkAuth, createToken };

@@ -10,7 +10,7 @@ router.post("/admin-command", async (req, res) => {
     if (username) {
         if (username.startsWith("@")) username = username.slice(1);
     }
-    let userExists = await checkUser(username);
+    let userExists = await User.exists({ userName: username });
     let success = false;
     let returns = null;
     if (command.endsWith("user") && !userExists) return res.json({ success });

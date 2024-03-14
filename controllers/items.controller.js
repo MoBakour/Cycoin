@@ -2,12 +2,11 @@ const express = require("express");
 const router = express.Router();
 
 const User = require("../models/user.js");
-const { checkUser } = require("../middlewares/auth.js");
 const generators = require("../middlewares/generators.js");
 
 router.post("/additem", async (req, res) => {
     let itemWeight = req.body.weight;
-    let userExists = await checkUser(req.user?._id);
+    let userExists = await User.exists({ _id: req.user?._id });
     if (!userExists)
         return res.status(400).json({
             success: false,
