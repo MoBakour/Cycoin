@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const User = require("../models/user.js");
+const User = require("../models/user.model.js");
 const generators = require("../middlewares/generators.js");
 
 router.post("/additem", async (req, res) => {

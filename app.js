@@ -1,23 +1,16 @@
-/*
-    Cycoin project is a high-school seniors economy class project
-    - Done by AWPS grade 12B1 boys 2021/2022 (contributers mentioned in the info.js file)
-*/
-
-// Require Packages
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 
-// Require Exernal Middlewares
 const generators = require("./middlewares/generators.js");
+const { authenticate } = require("./middlewares/auth.js");
 
 // controllers
 const pagesController = require("./controllers/pages.controller.js");
 const userController = require("./controllers/user.controller.js");
 const itemsController = require("./controllers/items.controller.js");
 const adminController = require("./controllers/admin.controller.js");
-const { authenticate } = require("./middlewares/auth.js");
 
 // Initialize Express App
 const app = express();
@@ -30,7 +23,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 dotenv.config();
 
-// .env Variables
 const PORT = parseInt(process.env.PORT || "3000");
 
 // Connect to Database & Listen to Server Requests

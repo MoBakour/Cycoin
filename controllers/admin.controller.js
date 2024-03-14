@@ -1,6 +1,6 @@
 const express = require("express");
 const fs = require("fs");
-const User = require("../models/user.js");
+const User = require("../models/user.model.js");
 const generators = require("../middlewares/generators.js");
 
 const router = express.Router();

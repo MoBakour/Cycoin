@@ -2,9 +2,9 @@ const bcrypt = require("bcrypt");
 const express = require("express");
 const router = express.Router();
 
-const User = require("../models/user.js");
+const User = require("../models/user.model.js");
 const { createToken } = require("../middlewares/auth.js");
-const signupValidation = require("../middlewares/signupValidation.js");
+const signupValidator = require("../middlewares/validator.js");
 
 router.post("/login", async (req, res) => {
     const { userName, userPassword } = req.body;
@@ -44,7 +44,7 @@ router.post("/login", async (req, res) => {
 
 router.post("/signup", async (req, res) => {
     if (!req.body.userGender) req.body.userGender = "";
-    let errorsObject = signupValidation(req.body);
+    let errorsObject = signupValidator(req.body);
     try {
         for (error in errorsObject) {
             if (errorsObject[error] !== "") {
@@ -100,7 +100,7 @@ router.post("/edit", async (req, res) => {
     comparePassword = await bcrypt.compare(password, originalPassword);
     switch (edit) {
         case "username":
-            let { userNameError } = await signupValidation({
+            let { userNameError } = signupValidator({
                 userName: username,
             });
             editError = userNameError;
@@ -125,7 +125,7 @@ router.post("/edit", async (req, res) => {
             compareNew = await bcrypt.compare(newPassword, originalPassword);
             if (compareNew) editError = "Same password doe?";
             let { userPasswordError, userPasswordConfirmationError } =
-                await signupValidation({
+                signupValidator({
                     userPassword: newPassword,
                     userPasswordConfirmation: confirmPassword,
                 });
