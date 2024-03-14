@@ -19,7 +19,6 @@ const projct_info = {
         "Express.js",
         "EJS",
         "JWT",
-        "Heroku Hosting",
         "Font Awesome",
         "Google Fonts",
         "Prettier Formatter",
